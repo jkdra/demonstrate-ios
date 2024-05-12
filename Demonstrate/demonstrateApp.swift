@@ -1,6 +1,6 @@
 //
 //  demonstrateApp.swift
-//  demonstrate
+//  Demonstrate
 //
 //  Created by Jawad Khadra on 5/9/24.
 //
