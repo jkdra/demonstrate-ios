@@ -14,6 +14,33 @@
 		75C8C8712BEDF59F008D162B /* demonstrateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8702BEDF59F008D162B /* demonstrateTests.swift */; };
 		75C8C87B2BEDF59F008D162B /* demonstrateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C87A2BEDF59F008D162B /* demonstrateUITests.swift */; };
 		75C8C87D2BEDF59F008D162B /* demonstrateUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C87C2BEDF59F008D162B /* demonstrateUITestsLaunchTests.swift */; };
+		75C8C88B2BEDF5C5008D162B /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 75C8C88A2BEDF5C5008D162B /* Nuke */; };
+		75C8C88D2BEDF5C5008D162B /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 75C8C88C2BEDF5C5008D162B /* NukeExtensions */; };
+		75C8C88F2BEDF5C5008D162B /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 75C8C88E2BEDF5C5008D162B /* NukeUI */; };
+		75C8C8922BEDF5F7008D162B /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 75C8C8912BEDF5F7008D162B /* Supabase */; };
+		75C8C8952BEDF610008D162B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 75C8C8942BEDF610008D162B /* Alamofire */; };
+		75C8C8982BEDF62C008D162B /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = 75C8C8972BEDF62B008D162B /* Inject */; };
+		75C8C89B2BEDF6F5008D162B /* Authentication Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C89A2BEDF6F5008D162B /* Authentication Model.swift */; };
+		75C8C89D2BEDF744008D162B /* Supabase Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C89C2BEDF744008D162B /* Supabase Client.swift */; };
+		75C8C8A02BEE0054008D162B /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 75C8C89F2BEE0054008D162B /* GoogleSignIn */; };
+		75C8C8A22BEE0054008D162B /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 75C8C8A12BEE0054008D162B /* GoogleSignInSwift */; };
+		75C8C8A82BEE081B008D162B /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8A72BEE081B008D162B /* Buttons.swift */; };
+		75C8C8AA2BEE08C4008D162B /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8A92BEE08C4008D162B /* Text.swift */; };
+		75C8C8AC2BEE0916008D162B /* UnboundedFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75C8C8AB2BEE0916008D162B /* UnboundedFont.ttf */; };
+		75C8C8B12BEE0A29008D162B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75C8C8B02BEE0A29008D162B /* StoreKit.framework */; };
+		75C8C8B32BEE0B4D008D162B /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8B22BEE0B4D008D162B /* OnboardingScreen.swift */; };
+		75C8C8B52BEE68D2008D162B /* UI Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8B42BEE68D2008D162B /* UI Modifiers.swift */; };
+		75C8C8B72BEE7C33008D162B /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8B62BEE7C33008D162B /* SignUpView.swift */; };
+		75C8C8B92BEE7C3B008D162B /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8B82BEE7C3B008D162B /* SignInView.swift */; };
+		75C8C8BC2BEE9C54008D162B /* FullscreenLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8BB2BEE9C54008D162B /* FullscreenLoading.swift */; };
+		75C8C8BF2BEEA7B2008D162B /* CreateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8BE2BEEA7B2008D162B /* CreateProfileView.swift */; };
+		75C8C8C12BEEACB9008D162B /* ProfileManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8C02BEEACB9008D162B /* ProfileManagement.swift */; };
+		75C8C8C42BEF3254008D162B /* ProfileStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8C32BEF3254008D162B /* ProfileStruct.swift */; };
+		75C8C8C62BEFB9D9008D162B /* OAuthUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8C52BEFB9D9008D162B /* OAuthUsername.swift */; };
+		75C8C8C92BF04F03008D162B /* ProfileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8C82BF04F03008D162B /* ProfileDetailView.swift */; };
+		75C8C8CC2BF05091008D162B /* PostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8CB2BF05091008D162B /* PostCard.swift */; };
+		75C8C8D02BF054B0008D162B /* FeaturedPostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8CF2BF054B0008D162B /* FeaturedPostCard.swift */; };
+		75C8C8D22BF05AD6008D162B /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8D12BF05AD6008D162B /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +71,27 @@
 		75C8C8762BEDF59F008D162B /* demonstrateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = demonstrateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C8C87A2BEDF59F008D162B /* demonstrateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demonstrateUITests.swift; sourceTree = "<group>"; };
 		75C8C87C2BEDF59F008D162B /* demonstrateUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demonstrateUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		75C8C89A2BEDF6F5008D162B /* Authentication Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Authentication Model.swift"; sourceTree = "<group>"; };
+		75C8C89C2BEDF744008D162B /* Supabase Client.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Supabase Client.swift"; sourceTree = "<group>"; };
+		75C8C8A72BEE081B008D162B /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		75C8C8A92BEE08C4008D162B /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		75C8C8AB2BEE0916008D162B /* UnboundedFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = UnboundedFont.ttf; sourceTree = "<group>"; };
+		75C8C8AD2BEE0960008D162B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Demonstrate/Info.plist; sourceTree = "<group>"; };
+		75C8C8AE2BEE0A19008D162B /* Demonstrate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Demonstrate.entitlements; path = Demonstrate/Demonstrate.entitlements; sourceTree = "<group>"; };
+		75C8C8B02BEE0A29008D162B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		75C8C8B22BEE0B4D008D162B /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
+		75C8C8B42BEE68D2008D162B /* UI Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI Modifiers.swift"; sourceTree = "<group>"; };
+		75C8C8B62BEE7C33008D162B /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		75C8C8B82BEE7C3B008D162B /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		75C8C8BB2BEE9C54008D162B /* FullscreenLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullscreenLoading.swift; sourceTree = "<group>"; };
+		75C8C8BE2BEEA7B2008D162B /* CreateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileView.swift; sourceTree = "<group>"; };
+		75C8C8C02BEEACB9008D162B /* ProfileManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileManagement.swift; sourceTree = "<group>"; };
+		75C8C8C32BEF3254008D162B /* ProfileStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStruct.swift; sourceTree = "<group>"; };
+		75C8C8C52BEFB9D9008D162B /* OAuthUsername.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthUsername.swift; sourceTree = "<group>"; };
+		75C8C8C82BF04F03008D162B /* ProfileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailView.swift; sourceTree = "<group>"; };
+		75C8C8CB2BF05091008D162B /* PostCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCard.swift; sourceTree = "<group>"; };
+		75C8C8CF2BF054B0008D162B /* FeaturedPostCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedPostCard.swift; sourceTree = "<group>"; };
+		75C8C8D12BF05AD6008D162B /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +99,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75C8C8B12BEE0A29008D162B /* StoreKit.framework in Frameworks */,
+				75C8C8952BEDF610008D162B /* Alamofire in Frameworks */,
+				75C8C8922BEDF5F7008D162B /* Supabase in Frameworks */,
+				75C8C88F2BEDF5C5008D162B /* NukeUI in Frameworks */,
+				75C8C8A22BEE0054008D162B /* GoogleSignInSwift in Frameworks */,
+				75C8C88B2BEDF5C5008D162B /* Nuke in Frameworks */,
+				75C8C88D2BEDF5C5008D162B /* NukeExtensions in Frameworks */,
+				75C8C8982BEDF62C008D162B /* Inject in Frameworks */,
+				75C8C8A02BEE0054008D162B /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,10 +131,13 @@
 		75C8C8532BEDF59D008D162B = {
 			isa = PBXGroup;
 			children = (
+				75C8C8AE2BEE0A19008D162B /* Demonstrate.entitlements */,
+				75C8C8AD2BEE0960008D162B /* Info.plist */,
 				75C8C85E2BEDF59D008D162B /* demonstrate */,
 				75C8C86F2BEDF59F008D162B /* demonstrateTests */,
 				75C8C8792BEDF59F008D162B /* demonstrateUITests */,
 				75C8C85D2BEDF59D008D162B /* Products */,
+				75C8C8AF2BEE0A29008D162B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,10 +154,17 @@
 		75C8C85E2BEDF59D008D162B /* demonstrate */ = {
 			isa = PBXGroup;
 			children = (
+				75C8C8CD2BF05487008D162B /* MainContentPages */,
+				75C8C8CA2BF05080008D162B /* PostComponents */,
+				75C8C8C72BEFCEDE008D162B /* Settings & Data */,
+				75C8C8C22BEF323C008D162B /* ProfileComponents */,
+				75C8C8A62BEE0809008D162B /* UI */,
+				75C8C8992BEDF6D9008D162B /* Onboarding & Auth */,
 				75C8C85F2BEDF59D008D162B /* demonstrateApp.swift */,
 				75C8C8612BEDF59D008D162B /* ContentView.swift */,
 				75C8C8632BEDF59E008D162B /* Assets.xcassets */,
 				75C8C8652BEDF59E008D162B /* Preview Content */,
+				75C8C89C2BEDF744008D162B /* Supabase Client.swift */,
 			);
 			path = demonstrate;
 			sourceTree = "<group>";
@@ -127,6 +194,105 @@
 			path = demonstrateUITests;
 			sourceTree = "<group>";
 		};
+		75C8C8992BEDF6D9008D162B /* Onboarding & Auth */ = {
+			isa = PBXGroup;
+			children = (
+				75C8C8A32BEE07AC008D162B /* Onboarding UI */,
+				75C8C89A2BEDF6F5008D162B /* Authentication Model.swift */,
+			);
+			path = "Onboarding & Auth";
+			sourceTree = "<group>";
+		};
+		75C8C8A32BEE07AC008D162B /* Onboarding UI */ = {
+			isa = PBXGroup;
+			children = (
+				75C8C8B22BEE0B4D008D162B /* OnboardingScreen.swift */,
+				75C8C8B62BEE7C33008D162B /* SignUpView.swift */,
+				75C8C8B82BEE7C3B008D162B /* SignInView.swift */,
+				75C8C8BD2BEEA5D1008D162B /* SignUpFlow */,
+				75C8C8D12BF05AD6008D162B /* WelcomeView.swift */,
+			);
+			path = "Onboarding UI";
+			sourceTree = "<group>";
+		};
+		75C8C8A62BEE0809008D162B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				75C8C8BA2BEE9C43008D162B /* Loading Indicators */,
+				75C8C8AB2BEE0916008D162B /* UnboundedFont.ttf */,
+				75C8C8A72BEE081B008D162B /* Buttons.swift */,
+				75C8C8A92BEE08C4008D162B /* Text.swift */,
+				75C8C8B42BEE68D2008D162B /* UI Modifiers.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		75C8C8AF2BEE0A29008D162B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				75C8C8B02BEE0A29008D162B /* StoreKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		75C8C8BA2BEE9C43008D162B /* Loading Indicators */ = {
+			isa = PBXGroup;
+			children = (
+				75C8C8BB2BEE9C54008D162B /* FullscreenLoading.swift */,
+			);
+			path = "Loading Indicators";
+			sourceTree = "<group>";
+		};
+		75C8C8BD2BEEA5D1008D162B /* SignUpFlow */ = {
+			isa = PBXGroup;
+			children = (
+				75C8C8C52BEFB9D9008D162B /* OAuthUsername.swift */,
+				75C8C8BE2BEEA7B2008D162B /* CreateProfileView.swift */,
+			);
+			path = SignUpFlow;
+			sourceTree = "<group>";
+		};
+		75C8C8C22BEF323C008D162B /* ProfileComponents */ = {
+			isa = PBXGroup;
+			children = (
+				75C8C8C02BEEACB9008D162B /* ProfileManagement.swift */,
+				75C8C8C32BEF3254008D162B /* ProfileStruct.swift */,
+				75C8C8C82BF04F03008D162B /* ProfileDetailView.swift */,
+			);
+			path = ProfileComponents;
+			sourceTree = "<group>";
+		};
+		75C8C8C72BEFCEDE008D162B /* Settings & Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Settings & Data";
+			sourceTree = "<group>";
+		};
+		75C8C8CA2BF05080008D162B /* PostComponents */ = {
+			isa = PBXGroup;
+			children = (
+				75C8C8CB2BF05091008D162B /* PostCard.swift */,
+				75C8C8CF2BF054B0008D162B /* FeaturedPostCard.swift */,
+			);
+			path = PostComponents;
+			sourceTree = "<group>";
+		};
+		75C8C8CD2BF05487008D162B /* MainContentPages */ = {
+			isa = PBXGroup;
+			children = (
+				75C8C8CE2BF05496008D162B /* NewPostFlow */,
+			);
+			path = MainContentPages;
+			sourceTree = "<group>";
+		};
+		75C8C8CE2BF05496008D162B /* NewPostFlow */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NewPostFlow;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +309,16 @@
 			dependencies = (
 			);
 			name = demonstrate;
+			packageProductDependencies = (
+				75C8C88A2BEDF5C5008D162B /* Nuke */,
+				75C8C88C2BEDF5C5008D162B /* NukeExtensions */,
+				75C8C88E2BEDF5C5008D162B /* NukeUI */,
+				75C8C8912BEDF5F7008D162B /* Supabase */,
+				75C8C8942BEDF610008D162B /* Alamofire */,
+				75C8C8972BEDF62B008D162B /* Inject */,
+				75C8C89F2BEE0054008D162B /* GoogleSignIn */,
+				75C8C8A12BEE0054008D162B /* GoogleSignInSwift */,
+			);
 			productName = demonstrate;
 			productReference = 75C8C85C2BEDF59D008D162B /* demonstrate.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +391,13 @@
 				Base,
 			);
 			mainGroup = 75C8C8532BEDF59D008D162B;
+			packageReferences = (
+				75C8C8892BEDF5C5008D162B /* XCRemoteSwiftPackageReference "Nuke" */,
+				75C8C8902BEDF5F7008D162B /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				75C8C8932BEDF610008D162B /* XCRemoteSwiftPackageReference "Alamofire" */,
+				75C8C8962BEDF62B008D162B /* XCRemoteSwiftPackageReference "Inject" */,
+				75C8C89E2BEE0054008D162B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			productRefGroup = 75C8C85D2BEDF59D008D162B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -231,6 +414,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75C8C8AC2BEE0916008D162B /* UnboundedFont.ttf in Resources */,
 				75C8C8672BEDF59E008D162B /* Preview Assets.xcassets in Resources */,
 				75C8C8642BEDF59E008D162B /* Assets.xcassets in Resources */,
 			);
@@ -257,8 +441,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75C8C89B2BEDF6F5008D162B /* Authentication Model.swift in Sources */,
+				75C8C8C92BF04F03008D162B /* ProfileDetailView.swift in Sources */,
 				75C8C8622BEDF59D008D162B /* ContentView.swift in Sources */,
+				75C8C8C62BEFB9D9008D162B /* OAuthUsername.swift in Sources */,
+				75C8C8CC2BF05091008D162B /* PostCard.swift in Sources */,
+				75C8C8C12BEEACB9008D162B /* ProfileManagement.swift in Sources */,
 				75C8C8602BEDF59D008D162B /* demonstrateApp.swift in Sources */,
+				75C8C8BC2BEE9C54008D162B /* FullscreenLoading.swift in Sources */,
+				75C8C8B32BEE0B4D008D162B /* OnboardingScreen.swift in Sources */,
+				75C8C8D02BF054B0008D162B /* FeaturedPostCard.swift in Sources */,
+				75C8C8B92BEE7C3B008D162B /* SignInView.swift in Sources */,
+				75C8C8BF2BEEA7B2008D162B /* CreateProfileView.swift in Sources */,
+				75C8C8AA2BEE08C4008D162B /* Text.swift in Sources */,
+				75C8C8B52BEE68D2008D162B /* UI Modifiers.swift in Sources */,
+				75C8C8A82BEE081B008D162B /* Buttons.swift in Sources */,
+				75C8C8B72BEE7C33008D162B /* SignUpView.swift in Sources */,
+				75C8C8C42BEF3254008D162B /* ProfileStruct.swift in Sources */,
+				75C8C89D2BEDF744008D162B /* Supabase Client.swift in Sources */,
+				75C8C8D22BF05AD6008D162B /* WelcomeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +548,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -404,7 +605,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -419,27 +620,37 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Demonstrate/Demonstrate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"demonstrate/Preview Content\"";
 				DEVELOPMENT_TEAM = CY6ALA5KQP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Demonstrate/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Demonstrate;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.demonstrateapp.demonstrate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -448,17 +659,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Demonstrate/Demonstrate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"demonstrate/Preview Content\"";
 				DEVELOPMENT_TEAM = CY6ALA5KQP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Demonstrate/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Demonstrate;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -466,9 +681,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.demonstrateapp.demonstrate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -588,6 +805,92 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		75C8C8892BEDF5C5008D162B /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.6.0;
+			};
+		};
+		75C8C8902BEDF5F7008D162B /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase-community/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+		75C8C8932BEDF610008D162B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		75C8C8962BEDF62B008D162B /* XCRemoteSwiftPackageReference "Inject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzysztofzablocki/Inject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.0;
+			};
+		};
+		75C8C89E2BEE0054008D162B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		75C8C88A2BEDF5C5008D162B /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75C8C8892BEDF5C5008D162B /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		75C8C88C2BEDF5C5008D162B /* NukeExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75C8C8892BEDF5C5008D162B /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeExtensions;
+		};
+		75C8C88E2BEDF5C5008D162B /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75C8C8892BEDF5C5008D162B /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
+		75C8C8912BEDF5F7008D162B /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75C8C8902BEDF5F7008D162B /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+		75C8C8942BEDF610008D162B /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75C8C8932BEDF610008D162B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		75C8C8972BEDF62B008D162B /* Inject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75C8C8962BEDF62B008D162B /* XCRemoteSwiftPackageReference "Inject" */;
+			productName = Inject;
+		};
+		75C8C89F2BEE0054008D162B /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75C8C89E2BEE0054008D162B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		75C8C8A12BEE0054008D162B /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 75C8C89E2BEE0054008D162B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 75C8C8542BEDF59D008D162B /* Project object */;
 }

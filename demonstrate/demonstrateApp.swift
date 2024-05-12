@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import UIKit
+@_exported import Inject
 
 @main
 struct demonstrateApp: App {
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
