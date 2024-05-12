@@ -20,7 +20,7 @@ struct OAuthUsername: View {
                 .largeTitle()
             
             Text("Looks like you used 3rd party sign up! You still need your username though, so uh, fix that.")
-                .subtitle()
+                .headline()
             
             Spacer()
             

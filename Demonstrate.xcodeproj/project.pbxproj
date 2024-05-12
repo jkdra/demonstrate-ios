@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		755F6B132BF13B0500DEC05A /* ShimmerEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755F6B122BF13B0500DEC05A /* ShimmerEffect.swift */; };
+		755F6B162BF155A900DEC05A /* Post Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755F6B152BF155A900DEC05A /* Post Protocol.swift */; };
+		755F6B182BF156F200DEC05A /* PostManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755F6B172BF156F200DEC05A /* PostManagement.swift */; };
+		755F6B1A2BF15AA300DEC05A /* PostSuccessfulView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755F6B192BF15AA300DEC05A /* PostSuccessfulView.swift */; };
+		755F6B1C2BF15CEC00DEC05A /* PostTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755F6B1B2BF15CEC00DEC05A /* PostTypeView.swift */; };
+		755F6B1E2BF16FF500DEC05A /* AppSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755F6B1D2BF16FF500DEC05A /* AppSettingsManager.swift */; };
 		75C8C8602BEDF59D008D162B /* demonstrateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C85F2BEDF59D008D162B /* demonstrateApp.swift */; };
 		75C8C8622BEDF59D008D162B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8612BEDF59D008D162B /* ContentView.swift */; };
 		75C8C8642BEDF59E008D162B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75C8C8632BEDF59E008D162B /* Assets.xcassets */; };
@@ -63,6 +68,11 @@
 
 /* Begin PBXFileReference section */
 		755F6B122BF13B0500DEC05A /* ShimmerEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerEffect.swift; sourceTree = "<group>"; };
+		755F6B152BF155A900DEC05A /* Post Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post Protocol.swift"; sourceTree = "<group>"; };
+		755F6B172BF156F200DEC05A /* PostManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManagement.swift; sourceTree = "<group>"; };
+		755F6B192BF15AA300DEC05A /* PostSuccessfulView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSuccessfulView.swift; sourceTree = "<group>"; };
+		755F6B1B2BF15CEC00DEC05A /* PostTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTypeView.swift; sourceTree = "<group>"; };
+		755F6B1D2BF16FF500DEC05A /* AppSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsManager.swift; sourceTree = "<group>"; };
 		75C8C85C2BEDF59D008D162B /* Demonstrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demonstrate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C8C85F2BEDF59D008D162B /* demonstrateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demonstrateApp.swift; sourceTree = "<group>"; };
 		75C8C8612BEDF59D008D162B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -130,6 +140,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		755F6B142BF1559A00DEC05A /* PostStruct */ = {
+			isa = PBXGroup;
+			children = (
+				755F6B152BF155A900DEC05A /* Post Protocol.swift */,
+				755F6B172BF156F200DEC05A /* PostManagement.swift */,
+			);
+			path = PostStruct;
+			sourceTree = "<group>";
+		};
 		75C8C8532BEDF59D008D162B = {
 			isa = PBXGroup;
 			children = (
@@ -268,6 +287,7 @@
 		75C8C8C72BEFCEDE008D162B /* Settings & Data */ = {
 			isa = PBXGroup;
 			children = (
+				755F6B1D2BF16FF500DEC05A /* AppSettingsManager.swift */,
 			);
 			path = "Settings & Data";
 			sourceTree = "<group>";
@@ -275,6 +295,7 @@
 		75C8C8CA2BF05080008D162B /* PostComponents */ = {
 			isa = PBXGroup;
 			children = (
+				755F6B142BF1559A00DEC05A /* PostStruct */,
 				75C8C8CB2BF05091008D162B /* PostCard.swift */,
 				75C8C8CF2BF054B0008D162B /* FeaturedPostCard.swift */,
 			);
@@ -292,6 +313,8 @@
 		75C8C8CE2BF05496008D162B /* NewPostFlow */ = {
 			isa = PBXGroup;
 			children = (
+				755F6B192BF15AA300DEC05A /* PostSuccessfulView.swift */,
+				755F6B1B2BF15CEC00DEC05A /* PostTypeView.swift */,
 			);
 			path = NewPostFlow;
 			sourceTree = "<group>";
@@ -444,21 +467,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				755F6B1E2BF16FF500DEC05A /* AppSettingsManager.swift in Sources */,
 				75C8C89B2BEDF6F5008D162B /* Authentication Model.swift in Sources */,
 				75C8C8C92BF04F03008D162B /* ProfileDetailView.swift in Sources */,
 				75C8C8622BEDF59D008D162B /* ContentView.swift in Sources */,
+				755F6B1A2BF15AA300DEC05A /* PostSuccessfulView.swift in Sources */,
 				75C8C8C62BEFB9D9008D162B /* OAuthUsername.swift in Sources */,
 				755F6B132BF13B0500DEC05A /* ShimmerEffect.swift in Sources */,
 				75C8C8CC2BF05091008D162B /* PostCard.swift in Sources */,
 				75C8C8C12BEEACB9008D162B /* ProfileManagement.swift in Sources */,
 				75C8C8602BEDF59D008D162B /* demonstrateApp.swift in Sources */,
 				75C8C8BC2BEE9C54008D162B /* FullscreenLoading.swift in Sources */,
+				755F6B162BF155A900DEC05A /* Post Protocol.swift in Sources */,
 				75C8C8B32BEE0B4D008D162B /* OnboardingScreen.swift in Sources */,
 				75C8C8D02BF054B0008D162B /* FeaturedPostCard.swift in Sources */,
 				75C8C8B92BEE7C3B008D162B /* SignInView.swift in Sources */,
 				75C8C8BF2BEEA7B2008D162B /* CreateProfileView.swift in Sources */,
 				75C8C8AA2BEE08C4008D162B /* Text.swift in Sources */,
+				755F6B1C2BF15CEC00DEC05A /* PostTypeView.swift in Sources */,
 				75C8C8B52BEE68D2008D162B /* UI Modifiers.swift in Sources */,
+				755F6B182BF156F200DEC05A /* PostManagement.swift in Sources */,
 				75C8C8A82BEE081B008D162B /* Buttons.swift in Sources */,
 				75C8C8B72BEE7C33008D162B /* SignUpView.swift in Sources */,
 				75C8C8C42BEF3254008D162B /* ProfileStruct.swift in Sources */,

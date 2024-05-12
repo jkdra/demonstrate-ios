@@ -14,7 +14,7 @@ struct WelcomeView: View {
                 .largeTitle()
             
             Text("Welcome to Demonstrate.\nIt's a revolution.")
-                .subtitle()
+                .headline()
             Spacer()
             Button("Close") {
                 

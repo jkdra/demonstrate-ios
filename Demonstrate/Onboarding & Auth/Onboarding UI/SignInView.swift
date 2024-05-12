@@ -20,7 +20,7 @@ struct SignInView: View {
                 .largeTitle()
             
             Text("Now quickly, let's get you back in.")
-                .subtitle()
+                .headline()
             
             Spacer()
             Button("Sign In") {

@@ -6,56 +6,46 @@
 //
 
 import SwiftUI
+import NukeUI
 
 struct FeaturedPostCard: View {
+    
+    var viewModel = PostCardViewModel()
+    
+    let imageURL = "earhlb"
+    
     var body: some View {
-        ZStack (alignment: .bottomLeading) {
-            
-            Image("NoPFP")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .containerRelativeFrame(.horizontal)
-            
+        
+        LazyImage(url: URL(string: imageURL)) { state in
+            if let image = state.image {
+                image.resizable()
+            } else {
+                Color(uiColor: .secondarySystemBackground)
+                    .overlay(alignment: .trailing) {
+                        Image(systemName: "star.fill")
+                            .font(.system(size: 128))
+                            .padding(.trailing, -24)
+                            .foregroundStyle(LinearGradient(colors: [.accentColor, .accentColor.opacity(0.3)], startPoint: .top, endPoint: .bottom))
+                    }
+            }
+        }
+        .aspectRatio(contentMode: .fill)
+        .containerRelativeFrame(.horizontal)
+        .frame(height: 316)
+        .overlay(alignment: .bottomLeading) {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Title")
                     .modifier(CustomTitlePostCard())
                 Text("Summary\nSummary")
                     .modifier(CustomBodyPostCard())
             }
-            .shadow(radius: 4)
             .padding()
             .padding(.top)
-            .foregroundStyle(.white)
+            .foregroundStyle(.primary)
             .hAlign(.leading)
-            .background(LinearGradient(colors: [.black.opacity(0.8), .clear], startPoint: .bottom, endPoint: .top))
-            
-//            HStack(spacing: 10) {
-//                
-//                Text("Footer")
-//                    .bold()
-//                    .modifier(CustomFooterPostCard())
-//                    .padding(.leading, 6)
-//                Spacer()
-//                
-//                Menu {
-//                    Button("View Author") {
-//                        
-//                    }
-//                    
-//                    Button("Report Post", role: .destructive) {
-//                        
-//                    }
-//                } label: {
-//                    Image(systemName: "ellipsis")
-//                        .padding(.trailing, 6)
-//                }
-//                .foregroundStyle(.primary)
-//
-//            }
-//            .padding(8)
-//            .background(.regularMaterial, in: .capsule)
-//            .vAlign(.top)
-//            .padding(10)
+            .background {
+                if !imageURL.isEmpty { LinearGradient(colors: [.black.opacity(0.6), .clear], startPoint: .bottom, endPoint: .top) }
+            }
         }
         .clipShape(.rect(cornerRadius: 14))
         .overlay(alignment: .top) {
@@ -76,15 +66,25 @@ struct FeaturedPostCard: View {
                     }
                 } label: {
                     Image(systemName: "ellipsis")
-                        
+                    
                 }
                 .foregroundStyle(.primary)
             }
-            .padding(10)
-            .padding(.horizontal, 6)
-            .background(.regularMaterial, in: .rect(cornerRadius: 12))
-            .padding(10)
-            .padding(.horizontal, -2)
+            .padding(9)
+            .background {
+                if !imageURL.isEmpty {
+                    RoundedRectangle(cornerRadius: 8)
+                        .foregroundStyle(.regularMaterial)
+                }
+            }
+            .padding(6)
+               
+        }
+        .clipShape(.rect(cornerRadius: 14))
+        .contextMenu {
+            Button("View Author") { }
+            
+            Button("Report Post", role: .destructive) { }
         }
     }
 }

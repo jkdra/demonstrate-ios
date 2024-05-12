@@ -57,7 +57,7 @@ struct OnboardingScreen: View {
                 Text("Glad to know you're also sick of congress's bs.")
                     .foregroundStyle(.secondary)
                     .foregroundStyle(Color(uiColor: .systemBackground))
-                    .subtitle()
+                    .headline()
                 
                 Spacer()
                 

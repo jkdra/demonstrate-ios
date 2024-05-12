@@ -27,7 +27,7 @@ struct SignUpView: View {
                     .largeTitle()
                 
                 Text("We knew you'd be convinced eventually.")
-                    .subtitle()
+                    .headline()
                 
                 Spacer()
                 Button("Sign Up") {

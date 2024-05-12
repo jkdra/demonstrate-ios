@@ -32,12 +32,20 @@ extension View {
         self.modifier(CustomLargeTitle())
     }
     
-    func subtitle() -> some View {
-        self.modifier(CustomSubtitle())
+    func headline() -> some View {
+        self.modifier(CustomHeadline())
     }
     
     func footnotePage() -> some View {
         self.modifier(FootnotePage())
+    }
+    
+    func titleCard() -> some View {
+        self.modifier(CustomTitlePostCard())
+    }
+    
+    func bodyCard() -> some View {
+        self.modifier(CustomBodyPostCard())
     }
 }
 
@@ -61,7 +69,7 @@ struct CustomLargeTitle: ViewModifier {
     }
 }
 
-struct CustomSubtitle: ViewModifier {
+struct CustomHeadline: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom("Unbounded", size: 16))

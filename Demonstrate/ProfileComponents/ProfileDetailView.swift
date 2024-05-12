@@ -12,8 +12,8 @@ struct ProfileDetailView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 10) {
-                    HStack(alignment: .center, spacing: 10) {
+                LazyVStack(alignment: .leading, spacing: 16) {
+                    HStack(alignment: .center, spacing: 12) {
                         Circle()
                             .frame(width: 84, height: 84)
                         
@@ -42,9 +42,18 @@ struct ProfileDetailView: View {
                     }
                     .primaryButton()
                     
-                    Text("Biography\n")
+                    Text("Biography")
                         .modifier(CustomBodyPostCard())
                     
+                    Section {
+                        ForEach(0..<3) { _ in
+                            PostCard()
+                                .padding(.vertical, -10)
+                        }
+                    } header: {
+                        Text("Posts by this user:")
+                            .font(.custom("Unbounded-Regular_Bold", size: 20))
+                    }
                     
                 }
                 .padding()

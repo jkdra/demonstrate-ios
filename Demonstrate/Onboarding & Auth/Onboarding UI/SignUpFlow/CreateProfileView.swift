@@ -22,7 +22,7 @@ struct CreateProfileView: View {
                 .largeTitle()
             
             Text(verbatim: "Why not give your profile some flair?")
-                .subtitle()
+                .headline()
             
             PhotosPicker(selection: $photoItem) {
                 Group {
