@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import demonstrate
+@testable import Demonstrate
 
 final class demonstrateTests: XCTestCase {
 
