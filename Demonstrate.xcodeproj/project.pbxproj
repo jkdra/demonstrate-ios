@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7553B28D2BF18293002FCC5C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553B28C2BF18293002FCC5C /* SettingsView.swift */; };
+		7553B28F2BF18546002FCC5C /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553B28E2BF18546002FCC5C /* AccountSettingsView.swift */; };
+		7553B2912BF18D56002FCC5C /* AccDelConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553B2902BF18D56002FCC5C /* AccDelConfirm.swift */; };
+		7553B2932BF1CA6D002FCC5C /* NewUsernameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553B2922BF1CA6D002FCC5C /* NewUsernameView.swift */; };
+		7553B2952BF1CF07002FCC5C /* PostCardLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553B2942BF1CF07002FCC5C /* PostCardLoading.swift */; };
+		7553B2972BF1D399002FCC5C /* FeaturedPostCardLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553B2962BF1D399002FCC5C /* FeaturedPostCardLoading.swift */; };
+		7553B2992BF1D474002FCC5C /* ProfileLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553B2982BF1D474002FCC5C /* ProfileLoading.swift */; };
+		7553B29B2BF1EB3C002FCC5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7553B29A2BF1EB3C002FCC5C /* LaunchScreen.storyboard */; };
 		755F6B132BF13B0500DEC05A /* ShimmerEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755F6B122BF13B0500DEC05A /* ShimmerEffect.swift */; };
 		755F6B162BF155A900DEC05A /* Post Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755F6B152BF155A900DEC05A /* Post Protocol.swift */; };
 		755F6B182BF156F200DEC05A /* PostManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755F6B172BF156F200DEC05A /* PostManagement.swift */; };
@@ -67,6 +75,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7553B28C2BF18293002FCC5C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7553B28E2BF18546002FCC5C /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
+		7553B2902BF18D56002FCC5C /* AccDelConfirm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccDelConfirm.swift; sourceTree = "<group>"; };
+		7553B2922BF1CA6D002FCC5C /* NewUsernameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUsernameView.swift; sourceTree = "<group>"; };
+		7553B2942BF1CF07002FCC5C /* PostCardLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCardLoading.swift; sourceTree = "<group>"; };
+		7553B2962BF1D399002FCC5C /* FeaturedPostCardLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedPostCardLoading.swift; sourceTree = "<group>"; };
+		7553B2982BF1D474002FCC5C /* ProfileLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoading.swift; sourceTree = "<group>"; };
+		7553B29A2BF1EB3C002FCC5C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		755F6B122BF13B0500DEC05A /* ShimmerEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerEffect.swift; sourceTree = "<group>"; };
 		755F6B152BF155A900DEC05A /* Post Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post Protocol.swift"; sourceTree = "<group>"; };
 		755F6B172BF156F200DEC05A /* PostManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManagement.swift; sourceTree = "<group>"; };
@@ -186,6 +202,7 @@
 				75C8C8612BEDF59D008D162B /* ContentView.swift */,
 				75C8C8632BEDF59E008D162B /* Assets.xcassets */,
 				75C8C8652BEDF59E008D162B /* Preview Content */,
+				7553B29A2BF1EB3C002FCC5C /* LaunchScreen.storyboard */,
 			);
 			path = Demonstrate;
 			sourceTree = "<group>";
@@ -261,6 +278,9 @@
 			children = (
 				75C8C8BB2BEE9C54008D162B /* FullscreenLoading.swift */,
 				755F6B122BF13B0500DEC05A /* ShimmerEffect.swift */,
+				7553B2942BF1CF07002FCC5C /* PostCardLoading.swift */,
+				7553B2962BF1D399002FCC5C /* FeaturedPostCardLoading.swift */,
+				7553B2982BF1D474002FCC5C /* ProfileLoading.swift */,
 			);
 			path = "Loading Indicators";
 			sourceTree = "<group>";
@@ -288,6 +308,10 @@
 			isa = PBXGroup;
 			children = (
 				755F6B1D2BF16FF500DEC05A /* AppSettingsManager.swift */,
+				7553B28C2BF18293002FCC5C /* SettingsView.swift */,
+				7553B28E2BF18546002FCC5C /* AccountSettingsView.swift */,
+				7553B2902BF18D56002FCC5C /* AccDelConfirm.swift */,
+				7553B2922BF1CA6D002FCC5C /* NewUsernameView.swift */,
 			);
 			path = "Settings & Data";
 			sourceTree = "<group>";
@@ -441,6 +465,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75C8C8AC2BEE0916008D162B /* UnboundedFont.ttf in Resources */,
+				7553B29B2BF1EB3C002FCC5C /* LaunchScreen.storyboard in Resources */,
 				75C8C8672BEDF59E008D162B /* Preview Assets.xcassets in Resources */,
 				75C8C8642BEDF59E008D162B /* Assets.xcassets in Resources */,
 			);
@@ -471,6 +496,8 @@
 				75C8C89B2BEDF6F5008D162B /* Authentication Model.swift in Sources */,
 				75C8C8C92BF04F03008D162B /* ProfileDetailView.swift in Sources */,
 				75C8C8622BEDF59D008D162B /* ContentView.swift in Sources */,
+				7553B2912BF18D56002FCC5C /* AccDelConfirm.swift in Sources */,
+				7553B28F2BF18546002FCC5C /* AccountSettingsView.swift in Sources */,
 				755F6B1A2BF15AA300DEC05A /* PostSuccessfulView.swift in Sources */,
 				75C8C8C62BEFB9D9008D162B /* OAuthUsername.swift in Sources */,
 				755F6B132BF13B0500DEC05A /* ShimmerEffect.swift in Sources */,
@@ -479,6 +506,7 @@
 				75C8C8602BEDF59D008D162B /* demonstrateApp.swift in Sources */,
 				75C8C8BC2BEE9C54008D162B /* FullscreenLoading.swift in Sources */,
 				755F6B162BF155A900DEC05A /* Post Protocol.swift in Sources */,
+				7553B2932BF1CA6D002FCC5C /* NewUsernameView.swift in Sources */,
 				75C8C8B32BEE0B4D008D162B /* OnboardingScreen.swift in Sources */,
 				75C8C8D02BF054B0008D162B /* FeaturedPostCard.swift in Sources */,
 				75C8C8B92BEE7C3B008D162B /* SignInView.swift in Sources */,
@@ -488,10 +516,14 @@
 				75C8C8B52BEE68D2008D162B /* UI Modifiers.swift in Sources */,
 				755F6B182BF156F200DEC05A /* PostManagement.swift in Sources */,
 				75C8C8A82BEE081B008D162B /* Buttons.swift in Sources */,
+				7553B2952BF1CF07002FCC5C /* PostCardLoading.swift in Sources */,
 				75C8C8B72BEE7C33008D162B /* SignUpView.swift in Sources */,
 				75C8C8C42BEF3254008D162B /* ProfileStruct.swift in Sources */,
 				75C8C89D2BEDF744008D162B /* Supabase Client.swift in Sources */,
+				7553B2972BF1D399002FCC5C /* FeaturedPostCardLoading.swift in Sources */,
 				75C8C8D22BF05AD6008D162B /* WelcomeView.swift in Sources */,
+				7553B2992BF1D474002FCC5C /* ProfileLoading.swift in Sources */,
+				7553B28D2BF18293002FCC5C /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +696,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -671,7 +704,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.6;
 				OTHER_LDFLAGS = (
 					"-Xlinker",
 					"-interposable",
@@ -703,6 +736,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -710,7 +744,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = org.demonstrateapp.demonstrate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -10,6 +10,7 @@ import SwiftUI
 struct SignInView: View {
     
     @Bindable var viewModel = AuthenticationViewModel()
+    @Binding var isPresented: Bool
     @State private var email = ""
     @State private var password = ""
     
@@ -67,5 +68,5 @@ struct SignInView: View {
 
 
 #Preview {
-    SignInView()
+    SignInView(isPresented: .constant(true))
 }

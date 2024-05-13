@@ -30,19 +30,19 @@ enum UsernameCheckStatus {
     var statusDisplay: String {
         switch self {
         case .taken:
-            "Username is Taken"
+            "Damn, username is taken. Sorry 🤷"
         case .lessThan3Char:
-            "Should have 3 characters minimum"
+            "Should have 3 characters minimum."
         case .invalidCharacters:
             "Can only contain letters, numbers, \".\" & \"_\"."
         case .invalidStartEnd:
-            "Should start & end with a letter"
+            "Must start & end with a letter."
         case .error:
-            "There was an error..."
+            "Shit, There was an error. :/"
         case .available:
             "Username Available!"
         case .checking:
-            " "
+            "Checking..."
         case .idle:
             " "
         }
@@ -67,6 +67,7 @@ final class AuthenticationViewModel {
     
     private var currentNonce: String?
     
+    @MainActor
     func signUp(email: String, password: String) async throws {
         loading = true
         defer { loading = false }
@@ -75,6 +76,7 @@ final class AuthenticationViewModel {
         print(response)
     }
     
+    @MainActor
     func signIn(email: String, password: String) async throws {
         loading = true
         defer { loading = false }
@@ -83,6 +85,7 @@ final class AuthenticationViewModel {
         print(session)
     }
     
+    @MainActor
     func signOut() async throws {
         loading = true
         defer { loading = false }
@@ -146,6 +149,7 @@ final class AuthenticationViewModel {
         }
     }
     
+    @MainActor
     func checkUsername(usernameInput: String, completion: @escaping (UsernameCheckStatus) -> Void) {
         Task {
             
@@ -222,6 +226,7 @@ final class AuthenticationViewModel {
 
     
     // MARK: Apple Sign In
+    @MainActor
     func appleSignIn() {
         loading = true
         defer { loading = false }
@@ -229,6 +234,7 @@ final class AuthenticationViewModel {
     }
      
     // MARK: Google Sign In
+    @MainActor
     func googleSignIn() {
         loading = true
         defer { loading = false }
@@ -239,9 +245,9 @@ final class AuthenticationViewModel {
         Task {
             let serverClientID = "132876560540-1ua1h2b7r26v91lqnsc3p32ge2sm2ad4.apps.googleusercontent.com"
             
-            guard let windowScene = await UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                  let window = await windowScene.windows.first,
-                  let rootViewController = await window.rootViewController else {
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                  let window = windowScene.windows.first,
+                  let rootViewController = window.rootViewController else {
                 print("No Root View Controller...")
                 return
             }
@@ -253,9 +259,7 @@ final class AuthenticationViewModel {
                 let userAuth = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
                 let user = userAuth.user
                 
-                guard let idToken = user.idToken else {
-                    throw AuthenticationError.tokenError(message: "ID Token Missing")
-                }
+                guard let idToken = user.idToken else { throw AuthenticationError.tokenError(message: "ID Token Missing") }
                 
                 guard let nonce = currentNonce else {
                     print("Nonce never recieved...")

@@ -11,6 +11,8 @@ import PhotosUI
 struct CreateProfileView: View {
     
     @Bindable var profileManage = ProfileManagement()
+    @Binding var isPresented: Bool
+    @State var success = false
     @State var displayName = ""
     @State var biography = ""
     @State var photoItem: PhotosPickerItem?
@@ -60,6 +62,7 @@ struct CreateProfileView: View {
             Button("Save Profile") { saveProfile() }
                 .primaryButton()
         }
+        .navigationBarBackButtonHidden()
         .padding()
         .overlay { FullscreenLoading(show: $profileManage.loading) }
     }
@@ -68,7 +71,6 @@ struct CreateProfileView: View {
         Task {
             do {
                 guard let newData = try await photoItem.loadTransferable(type: Data.self) else { return }
-                
                 await MainActor.run { imageData = newData }
             } catch {
                 print("Error Updating Image: \(error.localizedDescription)")
@@ -76,13 +78,12 @@ struct CreateProfileView: View {
         }
     }
     
+    @MainActor
     func saveProfile() {
-        Task {
-            await profileManage.saveProfile(newDispName: displayName, newBio: biography, imageData: imageData)
-        }
+        Task { success = await profileManage.saveProfile(newDispName: displayName, newBio: biography, imageData: imageData) }
     }
 }
 
 #Preview {
-    CreateProfileView()
+    CreateProfileView(isPresented: .constant(true))
 }

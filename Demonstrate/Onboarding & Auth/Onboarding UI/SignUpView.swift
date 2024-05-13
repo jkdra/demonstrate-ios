@@ -12,7 +12,7 @@ struct SignUpView: View {
     
     @Bindable var viewModel = AuthenticationViewModel()
     @State var usernameCheck: UsernameCheckStatus = .idle
-    
+    @Binding var isPresented: Bool
     @State private var username = ""
     @State private var email = ""
     @State private var password = ""
@@ -55,21 +55,16 @@ struct SignUpView: View {
                     .foregroundStyle(usernameCheck.statusColor?.opacity(10) ?? .primary)
                     .overlay(alignment: .trailing) {
                         Group {
-                            if usernameCheck == .idle {
-                                
-                            } else if usernameCheck == .checking {
+                            if usernameCheck == .checking {
                                 ProgressView()
                             } else if usernameCheck == .available {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .foregroundStyle(.accent)
-                                    .bold()
-                            } else {
+                            } else if usernameCheck != .idle {
                                 Image(systemName: "xmark.circle.fill")
-                                    .foregroundStyle(.red)
-                                    .bold()
-                                    
                             }
                         }
+                        .foregroundStyle(usernameCheck.statusColor ?? .primary)
+                        .bold()
                         .padding(.trailing)
                         
                     }
@@ -131,11 +126,10 @@ struct SignUpView: View {
         }
     }
     
-    func checkUsername() {
-        viewModel.checkUsername(usernameInput: username) { usernameCheck = $0 }
-    }
+    @MainActor
+    func checkUsername() { viewModel.checkUsername(usernameInput: username) { usernameCheck = $0 } }
 }
 
 #Preview {
-    SignUpView()
+    SignUpView(isPresented: .constant(true))
 }

@@ -10,6 +10,8 @@ import SwiftUI
 struct OAuthUsername: View {
     
     @Bindable var viewModel = AuthenticationViewModel()
+    @Binding var isPresented: Bool
+    @State private var success = false
     @State private var usernameCheck: UsernameCheckStatus = .idle
     @State private var username = ""
     @FocusState var focus
@@ -31,6 +33,7 @@ struct OAuthUsername: View {
             .disableWithOpacity(usernameCheck != .available)
         }
         .navigationBarBackButtonHidden()
+        .navigationDestination(isPresented: $success) { CreateProfileView(isPresented: $isPresented) }
         .overlay {
             VStack {
                 Text(usernameCheck.statusDisplay)
@@ -47,21 +50,16 @@ struct OAuthUsername: View {
                     .foregroundStyle(usernameCheck.statusColor?.opacity(10) ?? .primary)
                     .overlay(alignment: .trailing) {
                         Group {
-                            if usernameCheck == .idle {
-                                
-                            } else if usernameCheck == .checking {
+                            if usernameCheck == .checking {
                                 ProgressView()
                             } else if usernameCheck == .available {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .foregroundStyle(.accent)
-                                    .bold()
-                            } else {
+                            } else if usernameCheck != .idle {
                                 Image(systemName: "xmark.circle.fill")
-                                    .foregroundStyle(.red)
-                                    .bold()
-                                    
                             }
                         }
+                        .foregroundStyle(usernameCheck.statusColor ?? .primary)
+                        .bold()
                         .padding(.trailing)
                         
                     }
@@ -75,20 +73,23 @@ struct OAuthUsername: View {
     }
     
     func setUsername() {
+        
+        focus = false
+        
         Task {
             do {
                 try await ProfileManagement().updateUsername(newUsername: username)
+                success = true
             } catch {
                 print("ERROR SETTING USERNAME: \(error.localizedDescription)")
             }
         }
     }
     
-    func checkUsername() {
-        viewModel.checkUsername(usernameInput: username) { usernameCheck = $0 }
-    }
+    @MainActor
+    func checkUsername() { viewModel.checkUsername(usernameInput: username) { usernameCheck = $0 } }
 }
 
 #Preview {
-    OAuthUsername()
+    OAuthUsername(isPresented: .constant(true))
 }

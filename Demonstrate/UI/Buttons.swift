@@ -9,12 +9,14 @@ import Foundation
 import SwiftUI
 
 extension View {
-    func primaryButton() -> some View {
-        self.buttonStyle(PrimaryButtonStyle())
+    
+    
+    func primaryButton(destructive: Bool = false) -> some View {
+        self.buttonStyle(PrimaryButtonStyle(destructiveContext: destructive))
     }
     
-    func secondaryButton(maximizeWidth: Bool = true) -> some View {
-        self.buttonStyle(SecondaryButtonStyle(maximizeWidth: maximizeWidth))
+    func secondaryButton(destructive: Bool = false, maximizeWidth: Bool = true) -> some View {
+        self.buttonStyle(SecondaryButtonStyle(destructiveContext: destructive, maximizeWidth: maximizeWidth))
     }
 }
 

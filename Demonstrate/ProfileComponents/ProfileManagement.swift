@@ -14,7 +14,8 @@ class ProfileManagement {
     
     var loading = false
     
-    func saveProfile(newDispName: String, newBio: String, imageData: Data?) async {
+    @MainActor
+    func saveProfile(newDispName: String, newBio: String, imageData: Data?) async -> Bool {
         do {
             
             let currentUser = try await auth.session.user
@@ -32,8 +33,10 @@ class ProfileManagement {
                 .execute()
             
             print("Successful Update: \(updateStatus)")
+            return true
         } catch {
             print("ERROR UPDATING PROFILE: \(error.localizedDescription)")
+            return false
         }
     }
     

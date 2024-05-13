@@ -15,6 +15,7 @@ struct demonstrateApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(AppSettingsManager().appTheme.themePreference)
         }
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct OnboardingScreen: View {
     
     @Bindable var viewModel = AuthenticationViewModel()
-    
+    @Binding var isPresented: Bool
     @State private var oauthSignUp: Bool = false
     @State private var animate = false
     private let columns = 8
@@ -26,6 +26,7 @@ struct OnboardingScreen: View {
                                 .font(.custom("Unbounded-Regular_Black", size: 56))
                                 .foregroundStyle(.primary.opacity(0.085))
                                 .frame(minWidth: 592)
+                                .colorInvert()
                         }
                     }
                     .offset(x: animate ? (row % 2 == 0 ? -reader.size.width * 2 : reader.size.width * 2) : 0, y: 0)
@@ -34,11 +35,7 @@ struct OnboardingScreen: View {
             }
             .rotationEffect(.degrees(15))
         }
-        .onAppear {
-            withAnimation(Animation.linear(duration: 30).repeatForever(autoreverses: false)) {
-                animate = true
-            }
-        }
+        .onAppear { withAnimation(Animation.linear(duration: 30).repeatForever(autoreverses: false)) { animate = true } }
     }
     
     var body: some View {
@@ -65,19 +62,18 @@ struct OnboardingScreen: View {
                     .frame(maxWidth: .infinity, alignment: .center)
                     .modifier(FootnotePage())
                 NavigationLink("Sign Up") {
-                    SignUpView()
+                    SignUpView(isPresented: $isPresented)
                         .onAppear { viewModel.flow = .signUp }
                 }
                 .primaryButton()
                 
                 
                 NavigationLink("Sign In") {
-                    SignInView()
+                    SignInView(isPresented: $isPresented)
                         .onAppear { viewModel.flow = .signIn }
                 }
                 .background(Color(uiColor: .systemBackground), in: .rect(cornerRadius: 14))
                 .secondaryButton()
-                
                 
                 Text("Or continue with:")
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -86,7 +82,7 @@ struct OnboardingScreen: View {
                 HStack {
                     
                     Button {
-                        
+                        googleSignIn()
                     } label: {
                         HStack {
                             Image("googlelogo")
@@ -100,18 +96,16 @@ struct OnboardingScreen: View {
                     .buttonStyle(GoogleSignInButtonStyle())
                     
                     Button("Apple", systemImage: "applelogo") {
-                        
+                        appleSignIn()
                     }
                     .buttonStyle(AppleSignInButtonStyle())
                 }
             }
-            .navigationDestination(isPresented: .constant(false)) { OAuthUsername() }
             .padding()
             .overlay { FullscreenLoading(show: $viewModel.loading) }
             .toolbar { ToolbarItem(placement: .primaryAction) { Text("") } }
-            .onChange(of: viewModel.flow) {
-                if viewModel.flow == .signUpOAuth { oauthSignUp = true }
-            }
+            .navigationDestination(isPresented: $oauthSignUp) { OAuthUsername(isPresented: $isPresented) }
+            .onChange(of: viewModel.flow) { if viewModel.flow == .signUpOAuth { oauthSignUp = true } }
             .background {
                 LinearGradient(colors: [.accentColor, .clear], startPoint: .init(x: 0, y: 0.3), endPoint: .init(x: 0, y: 0.6))
                     .ignoresSafeArea()
@@ -120,15 +114,17 @@ struct OnboardingScreen: View {
         }
     }
     
+    @MainActor 
     func googleSignIn() {
         viewModel.googleSignIn()
     }
     
+    @MainActor 
     func appleSignIn() {
         viewModel.appleSignIn()
     }
 }
 
 #Preview {
-    OnboardingScreen()
+    OnboardingScreen(isPresented: .constant(true))
 }

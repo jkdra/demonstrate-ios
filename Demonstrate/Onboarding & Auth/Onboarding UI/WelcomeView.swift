@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct WelcomeView: View {
+    
+    @Binding var isPresented: Bool
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("You're all set!")
@@ -15,16 +18,16 @@ struct WelcomeView: View {
             
             Text("Welcome to Demonstrate.\nIt's a revolution.")
                 .headline()
+            
             Spacer()
-            Button("Close") {
-                
-            }
-            .primaryButton()
+            Button("Close") { isPresented = false }
+                .primaryButton()
         }
+        .navigationBarBackButtonHidden()
         .padding()
     }
 }
 
 #Preview {
-    WelcomeView()
+    WelcomeView(isPresented: .constant(true))
 }
