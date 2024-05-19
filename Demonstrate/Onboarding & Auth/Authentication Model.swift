@@ -29,22 +29,13 @@ enum UsernameCheckStatus {
     
     var statusDisplay: String {
         switch self {
-        case .taken:
-            "Damn, username is taken. Sorry 🤷"
-        case .lessThan3Char:
-            "Should have 3 characters minimum."
-        case .invalidCharacters:
-            "Can only contain letters, numbers, \".\" & \"_\"."
-        case .invalidStartEnd:
-            "Must start & end with a letter."
-        case .error:
-            "Shit, There was an error. :/"
-        case .available:
-            "Username Available!"
-        case .checking:
-            "Checking..."
-        case .idle:
-            " "
+        case .taken: "Damn, username is taken. Sorry."
+        case .lessThan3Char: "Should have 3 characters minimum."
+        case .invalidCharacters: "Can only contain letters, numbers, \".\" & \"_\"."
+        case .invalidStartEnd: "Must start & end with a letter."
+        case .error: "Shit, There was an error. :/"
+        case .available: "Username Available!"
+        default: " "
         }
     }
     
@@ -60,39 +51,77 @@ enum UsernameCheckStatus {
 @Observable
 final class AuthenticationViewModel {
     
-    var isAuthenticated: Bool = false
+    var isAuthenticated = false
+    var showOnboarding = false
     var oAuthSuccess = false
     var loading = false
+    var error = false
+    var errorMsg = ""
     var flow: AuthFlow = .idle
     
     private var currentNonce: String?
     
     @MainActor
-    func signUp(email: String, password: String) async throws {
+    func signUp(email: String, password: String) async {
         loading = true
         defer { loading = false }
         guard !email.isEmpty, !password.isEmpty else { return }
-        let response = try await supabase.auth.signUp(email: email, password: password)
-        print(response)
+        do {
+            let response = try await supabase.auth.signUp(email: email, password: password)
+            print(response)
+        } catch {
+            print("ERROR SIGNING UP: \(error)")
+            showError(errorMsg: error.localizedDescription)
+        }
     }
     
     @MainActor
-    func signIn(email: String, password: String) async throws {
+    func signIn(email: String, password: String) async {
         loading = true
         defer { loading = false }
         guard !email.isEmpty, !password.isEmpty else { return }
-        let session = try await supabase.auth.signIn(email: email, password: password)
-        print(session)
+        
+        do {
+            let session = try await supabase.auth.signIn(email: email, password: password)
+            print(session)
+            showOnboarding = false
+        } catch {
+            print("ERROR SIGNING IN: \(error)")
+            showError(errorMsg: error.localizedDescription)
+        }
     }
     
     @MainActor
-    func signOut() async throws {
+    func resetPassword(email: String) async {
         loading = true
         defer { loading = false }
-        try await supabase.auth.signOut()
-        await MainActor.run {
-            flow = .idle
-            isAuthenticated = false
+        
+        guard !email.isEmpty else {
+            showError(errorMsg: "Uh, we need an email? Please type one in.")
+            return
+        }
+        
+        do {
+            try await auth.resetPasswordForEmail(email)
+        } catch {
+            showError(errorMsg: error.localizedDescription)
+        }
+    }
+    
+    @MainActor
+    func signOut() async {
+        loading = true
+        defer { loading = false }
+        do {
+            try await supabase.auth.signOut()
+            await MainActor.run {
+                flow = .idle
+                isAuthenticated = false
+                showOnboarding = true
+            }
+        } catch {
+            print("ERROR SIGNING OUT: \(error.localizedDescription)")
+            showError(errorMsg: error.localizedDescription)
         }
     }
     
@@ -105,7 +134,6 @@ final class AuthenticationViewModel {
         
         return hashString
     }
-    
     func randomNonceString(length: Int = 32) -> String {
         precondition(length > 0)
         let charset: [Character] =
@@ -118,9 +146,7 @@ final class AuthenticationViewModel {
                 var random: UInt8 = 0
                 let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
                 if errorCode != errSecSuccess {
-                    fatalError(
-                        "Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)"
-                       )
+                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
                    }
                    return random
                }
@@ -141,6 +167,7 @@ final class AuthenticationViewModel {
     
     @MainActor
     func isUserAuthenticated() async {
+        defer { showOnboarding = !isAuthenticated }
         do {
             _ = try await supabase.auth.session.user
             isAuthenticated = true
@@ -203,20 +230,21 @@ final class AuthenticationViewModel {
         do {
             let user = try await auth.session.user
             let newProfile: Profile = try await database.from("profiles")
-                                             .select("username")
-                                             .eq("id", value: user.id)
-                                             .single()
-                                             .execute()
-                                             .value
+                .select("username")
+                .eq("id", value: user.id)
+                .single()
+                .execute()
+                .value
             
             if newProfile.username != nil {
                 // Username exists, user is not new
                 await MainActor.run { flow = .signIn }
+                showOnboarding = false
             } else {
                 // Username is nil, prompt user to set up their profile
                 await MainActor.run { flow = .signUpOAuth }
             }
-            
+            successHaptic
         } catch {
             print("Error checking user status: \(error.localizedDescription)")
             await MainActor.run { flow = .signUpOAuth } // Default to sign up on error
@@ -273,10 +301,40 @@ final class AuthenticationViewModel {
                 try await auth.signInWithIdToken(credentials: credentials)
                 await checkOAuthUser()
                 await MainActor.run { oAuthSuccess = true }
+                successHaptic
             } catch {
                 print("ERROR SIGNING IN WITH GOOGLE: \(error.localizedDescription)")
+                showError(errorMsg: error.localizedDescription)
             }
         }
+    }
+    
+    func deleteAccount() async {
+        loading = true
+        defer { loading = false }
+        do {
+            let currentUser = try await auth.session.user
+            
+            let deleteResponse: () = try await auth.admin.deleteUser(id: currentUser.id.uuidString)
+            
+            print("Deletion Successful: \(deleteResponse)")
+            
+            await MainActor.run {
+                flow = .idle
+                isAuthenticated = false
+                showOnboarding = true
+            }
+        } catch {
+            print("ERROR DELETING ACCOUNT: \(error)")
+            await showError(errorMsg: error.localizedDescription)
+        }
+    }
+    
+    @MainActor
+    private func showError(errorMsg: String) {
+        errorHaptic
+        self.errorMsg = errorMsg
+        error = true
     }
 }
 
@@ -344,6 +402,7 @@ final class AppleSignInModel: NSObject, ASAuthorizationControllerDelegate, ASAut
                     print(result)
                     await AuthenticationViewModel().checkOAuthUser()
                 } catch {
+                    errorHaptic
                     print("ERROR with apple sign in: \(error.localizedDescription)")
                 }
             }

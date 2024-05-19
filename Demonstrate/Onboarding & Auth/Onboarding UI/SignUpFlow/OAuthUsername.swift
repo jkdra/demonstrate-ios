@@ -10,6 +10,7 @@ import SwiftUI
 struct OAuthUsername: View {
     
     @Bindable var viewModel = AuthenticationViewModel()
+    
     @Binding var isPresented: Bool
     @State private var success = false
     @State private var usernameCheck: UsernameCheckStatus = .idle
@@ -21,16 +22,18 @@ struct OAuthUsername: View {
             Text("Welcome to the movement!")
                 .largeTitle()
             
-            Text("Looks like you used 3rd party sign up! You still need your username though, so uh, fix that.")
+            Text("3rd Party sign in, how convenient!\n\nIt'd also be convenient for you to have a username, please.")
                 .headline()
             
             Spacer()
             
+            
             Button("Set Username") {
-                
+                AppSettingsManager().primaryButtonHaptic()
+                setUsername()
             }
-            .primaryButton()
-            .disableWithOpacity(usernameCheck != .available)
+                .primaryButton()
+                .disableWithOpacity(usernameCheck != .available)
         }
         .navigationBarBackButtonHidden()
         .navigationDestination(isPresented: $success) { CreateProfileView(isPresented: $isPresented) }
@@ -77,12 +80,8 @@ struct OAuthUsername: View {
         focus = false
         
         Task {
-            do {
-                try await ProfileManagement().updateUsername(newUsername: username)
-                success = true
-            } catch {
-                print("ERROR SETTING USERNAME: \(error.localizedDescription)")
-            }
+            await ProfileManagement().updateUsername(newUsername: username)
+            success = true
         }
     }
     

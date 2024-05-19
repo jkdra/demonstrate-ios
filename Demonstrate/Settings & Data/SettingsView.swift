@@ -55,16 +55,12 @@ struct SettingsView: View {
                             .foregroundStyle(.secondary)
                     }
                     
-                    NavigationLink("Account Settings") {
-                        AccountSettingsView()
-                    }
+                    NavigationLink("Account Settings") { AccountSettingsView() }
                     
                 } header: {
                     Text("Account")
                         .font(.custom("Unbounded", size: 12))
                 }
-                
-                Text("")
                     
             }
             .customNavBar("Settings")

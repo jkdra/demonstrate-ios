@@ -19,7 +19,6 @@ struct NewUsernameView: View {
     
     var body: some View {
         VStack (alignment: .leading, spacing: 10) {
-            Divider()
             Text("Bet, let's set something new, given no one else has taken it.")
                 .headline()
             

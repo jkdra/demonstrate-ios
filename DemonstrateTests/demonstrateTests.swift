@@ -6,13 +6,16 @@
 //
 
 import XCTest
+import SwiftUI
 @testable import Demonstrate
 
 final class demonstrateTests: XCTestCase {
 
+    let authModel = AuthenticationViewModel()
+    
     func testNonceResponse() {
         // Arrange
-        let authModel = AuthenticationViewModel()
+        
         
         // Act
         let firstNonce = authModel.randomNonceString()
@@ -20,13 +23,5 @@ final class demonstrateTests: XCTestCase {
         
         // Assert
         XCTAssertNotEqual(firstNonce, secondNonce)
-    }
-    
-    func testUsernameCheck() {
-        // Arrange
-        
-        // Act
-        
-        // Assert
     }
 }

@@ -11,6 +11,13 @@ import SwiftUI
 enum PostType: String, Codable {
     case petition, event
     
+    var postTitle: String {
+        switch self {
+        case .petition: "Petition"
+        case .event: "Event"
+        }
+    }
+    
     var postLabel: some View {
         switch self {
         case .petition:
@@ -35,12 +42,14 @@ enum PostType: String, Codable {
 
 protocol Post: Identifiable, Codable, Hashable {
     var id: Int? { get }
+    var createdAt: Date? { get }
+    var updatedAt: Date? { get }
     var title: String { get set }
     var summary: String { get set }
     var description: String { get set }
     var authorID: UUID? { get }
-    var createdAt: Date? { get set }
-    var updatedAt: Date? { get set }
+    var topic: Topic { get set }
     var archived: Bool { get set }
-    var imageURL: String? { get set }
+    var imageURL: String { get set }
+    var postType: PostType { get set }
 }

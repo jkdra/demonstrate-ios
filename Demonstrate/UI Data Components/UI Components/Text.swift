@@ -8,24 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct CustomTextFieldStyle: ViewModifier {
-    
-    var bgColor: Color = Color(uiColor: .secondarySystemBackground)
-    
-    func body(content: Content) -> some View {
-        content
-            .padding()
-            .font(.custom("Unbounded", size: 14))
-            .background {
-                RoundedRectangle(cornerRadius: 14)
-                    .foregroundStyle(bgColor.opacity(bgColor == Color(uiColor: .secondarySystemBackground) ? 1 : 0.2))
-                RoundedRectangle(cornerRadius: 14)
-                    .stroke(lineWidth: 4)
-                    .foregroundStyle(bgColor == Color(uiColor: .secondarySystemBackground) ? .tertiary : .primary)
-            }
-            .clipShape(.rect(cornerRadius: 14))
-    }
-}
+
 
 extension View {
     func largeTitle() -> some View {

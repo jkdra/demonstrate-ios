@@ -16,6 +16,9 @@ struct OnboardingScreen: View {
     private let columns = 8
     private let rows = 25
     
+    @State private var signUp: Bool = false
+    @State private var signIn: Bool = false
+    
     var background: some View {
         GeometryReader { reader in
             VStack(spacing: 5) {
@@ -61,19 +64,23 @@ struct OnboardingScreen: View {
                 Text("By signing up below, you agree to Demonstrate's **Community Guidelines**")
                     .frame(maxWidth: .infinity, alignment: .center)
                     .modifier(FootnotePage())
-                NavigationLink("Sign Up") {
-                    SignUpView(isPresented: $isPresented)
-                        .onAppear { viewModel.flow = .signUp }
+                Button("Sign Up") {
+                    AppSettingsManager.shared.primaryButtonHaptic()
+                    viewModel.flow = .signUp
+                    signUp = true
                 }
                 .primaryButton()
+                .navigationDestination(isPresented: $signUp) { SignUpView(isPresented: $isPresented) }
                 
                 
-                NavigationLink("Sign In") {
-                    SignInView(isPresented: $isPresented)
-                        .onAppear { viewModel.flow = .signIn }
+                Button("Sign In") {
+                    AppSettingsManager.shared.primaryButtonHaptic()
+                    viewModel.flow = .signIn
+                    signIn = true
                 }
                 .background(Color(uiColor: .systemBackground), in: .rect(cornerRadius: 14))
                 .secondaryButton()
+                .navigationDestination(isPresented: $signIn) { SignInView(isPresented: $isPresented)}
                 
                 Text("Or continue with:")
                     .frame(maxWidth: .infinity, alignment: .center)
@@ -82,6 +89,7 @@ struct OnboardingScreen: View {
                 HStack {
                     
                     Button {
+                        AppSettingsManager.shared.primaryButtonHaptic()
                         googleSignIn()
                     } label: {
                         HStack {
@@ -96,6 +104,7 @@ struct OnboardingScreen: View {
                     .buttonStyle(GoogleSignInButtonStyle())
                     
                     Button("Apple", systemImage: "applelogo") {
+                        AppSettingsManager.shared.primaryButtonHaptic()
                         appleSignIn()
                     }
                     .buttonStyle(AppleSignInButtonStyle())

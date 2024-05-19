@@ -37,6 +37,7 @@ struct PostTypeView: View {
                         .disableWithOpacity(postType == .event)
                 }
                 NavigationLink("Continue") {
+                    if let postTypeSelection { ChooseTopicView(postType: postTypeSelection) }
                     
                 }
                 .primaryButton()

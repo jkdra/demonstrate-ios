@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import PhotosUI
 import Supabase
 import SwiftUI
 
@@ -106,7 +107,14 @@ class ProfileManagement {
         error = true
     }
     
-    private func updateImage() async throws {
-        
+    func updateImage(from photoItem: PhotosPickerItem, completion: @escaping (Data) -> (Void)) {
+        Task {
+            do {
+                guard let newData = try await photoItem.loadTransferable(type: Data.self) else { return }
+                
+                await MainActor.run { completion(newData) }
+                
+            } catch { print("Error Updating Image: \(error.localizedDescription)") }
+        }
     }
 }

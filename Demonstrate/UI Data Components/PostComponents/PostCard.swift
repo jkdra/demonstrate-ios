@@ -12,44 +12,44 @@ struct PostCard: View {
         NavigationLink {
             
         } label: {
-            
-        }
-        VStack(alignment: .leading, spacing: 12) {
-            Text("Title")
-                .modifier(CustomTitlePostCard())
-            
-            Text("Summary\nSummary\nSummary")
-                .lineLimit(3, reservesSpace: true)
-                .modifier(CustomBodyPostCard())
-            
-            Divider()
-            HStack {
-                Circle()
-                    .frame(width: 16, height: 16)
-                Text("Footer")
-                    .modifier(CustomFooterPostCard())
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Title")
+                    .modifier(CustomTitlePostCard())
                 
-                Spacer()
+                Text("Summary\nSummary\nSummary")
+                    .lineLimit(3, reservesSpace: true)
+                    .modifier(CustomBodyPostCard())
                 
-                Label("Post Info", systemImage: "person.2.fill")
-                    .bold()
-                    .modifier(CustomFooterPostCard())
-            }
-            
-        }
-        .padding()
-        .background(alignment: .trailing) {
-            RoundedRectangle(cornerRadius: 14)
-                .foregroundStyle(Color(uiColor: .secondarySystemBackground))
-            Image("NoPFP")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(maxWidth: UIScreen.main.bounds.width / 2)
-                .mask {
-                    RadialGradient(colors: [.white, .clear], center: .topTrailing, startRadius: 0, endRadius: 192)
+                Divider()
+                HStack {
+                    Circle()
+                        .frame(width: 16, height: 16)
+                    Text("Footer")
+                        .modifier(CustomFooterPostCard())
+                    
+                    Spacer()
+                    
+                    Label("Post Info", systemImage: "person.2.fill")
+                        .bold()
+                        .modifier(CustomFooterPostCard())
                 }
-                .hAlign(.trailing)
+                
+            }
+            .padding()
+            .background(alignment: .trailing) {
+                RoundedRectangle(cornerRadius: 14)
+                    .foregroundStyle(Color(uiColor: .secondarySystemBackground))
+                Image("NoPFP")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: UIScreen.main.bounds.width / 2)
+                    .mask {
+                        RadialGradient(colors: [.white, .clear], center: .topTrailing, startRadius: 0, endRadius: 192)
+                    }
+                    .hAlign(.trailing)
+            }
         }
+        .foregroundStyle(.primary)
         .overlay(alignment: .topTrailing) {
 
             Menu {
@@ -61,7 +61,8 @@ struct PostCard: View {
                 }
             } label: {
                 Image(systemName: "ellipsis")
-                    .padding(8)
+                    .padding(9)
+                    .bold()
                     .background(.regularMaterial, in: .circle)
                     .padding(.trailing, -6)
                     .padding(10)
@@ -73,7 +74,6 @@ struct PostCard: View {
             Button("View Author") {
                 
             }
-            
             Button("Report Post", role: .destructive) {
                 
             }

@@ -11,6 +11,8 @@ struct SignInView: View {
     
     @Bindable var viewModel = AuthenticationViewModel()
     @Binding var isPresented: Bool
+    @State private var showPassword = false
+    @State private var checkEmail = false
     @State private var email = ""
     @State private var password = ""
     
@@ -24,11 +26,9 @@ struct SignInView: View {
                 .headline()
             
             Spacer()
-            Button("Sign In") {
-                
-            }
-            .primaryButton()
-            .disableWithOpacity(email.isEmpty || password.isEmpty)
+            Button("Sign In") { AppSettingsManager.shared.primaryButtonHaptic(); signIn() }
+                .primaryButton()
+                .disableWithOpacity(email.isEmpty || password.isEmpty)
         }
         .overlay {
             VStack {
@@ -37,31 +37,46 @@ struct SignInView: View {
                     .autocorrectionDisabled()
                     .modifier(CustomTextFieldStyle())
                 
-                TextField("Password", text: $password)
-                    .textContentType(.password)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .modifier(CustomTextFieldStyle())
-                Button("Reset password") {
-                    
+                Group {
+                    if !showPassword {
+                        SecureField("Password", text: $password)
+                            
+                    } else {
+                        TextField("Password", text: $password)
+                    }
                 }
-                .hAlign(.trailing)
-                .font(.custom("Unbounded", size: 14))
-                .padding(.vertical, 8)
+                .textContentType(.password)
+                .autocorrectionDisabled()
+                .textInputAutocapitalization(.never)
+                .modifier(CustomTextFieldStyle())
+                .overlay(alignment: .trailing) {
+                    Image(systemName: showPassword ? "eye.slash.fill" : "eye.fill")
+                        .foregroundStyle(.secondary)
+                        .font(.headline)
+                        .padding(.trailing)
+                        .onTapGesture { showPassword.toggle() }
+                }
+                Button("Reset password") { resetPass() }
+                    .hAlign(.trailing)
+                    .font(.custom("Unbounded", size: 14))
+                    .padding(.vertical, 8)
             }
         }
+        .alert("Oh shit!", isPresented: $viewModel.error, actions: {}) { Text(viewModel.errorMsg) }
+        .alert("Check your inbox", isPresented: $checkEmail) {} message: { Text("We sent an email with instructions to change your password.") }
         .padding()
         .overlay { FullscreenLoading(show: $viewModel.loading)}
     }
     
     func signIn() {
         Task {
-            do {
-                try await viewModel.signIn(email: email, password: password)
-                
-            } catch {
-                print("ERROR SIGNING IN: \(error.localizedDescription)")
-            }
+            await viewModel.signIn(email: email, password: password)
+        }
+    }
+    
+    func resetPass() {
+        Task {
+            await viewModel.resetPassword(email: email)
         }
     }
 }

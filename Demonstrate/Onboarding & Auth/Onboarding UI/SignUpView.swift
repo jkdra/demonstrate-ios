@@ -11,6 +11,7 @@ import Symbols
 struct SignUpView: View {
     
     @Bindable var viewModel = AuthenticationViewModel()
+    @Bindable var pManage = ProfileManagement()
     @State var usernameCheck: UsernameCheckStatus = .idle
     @Binding var isPresented: Bool
     @State private var username = ""
@@ -25,19 +26,15 @@ struct SignUpView: View {
             VStack (alignment: .leading, spacing: 10) {
                 Text(verbatim: "Welcome to the movement!")
                     .largeTitle()
-                
                 Text("We knew you'd be convinced eventually.")
                     .headline()
                 
                 Spacer()
-                Button("Sign Up") {
-                    signUpUser()
-                }
-                .primaryButton()
-                .disableWithOpacity(usernameCheck != .available || email.isEmpty || password.isEmpty)
+                Button("Sign Up") { AppSettingsManager().primaryButtonHaptic(); signUpUser() }
+                    .primaryButton()
+                    .disableWithOpacity(usernameCheck != .available || email.isEmpty || password.isEmpty)
                 
             }
-            
         }
         .overlay {
             VStack {
@@ -108,21 +105,17 @@ struct SignUpView: View {
             }
         }
         .padding()
+        .navigationBarBackButtonHidden()
+        .alert("Whoops!", isPresented: $viewModel.error, actions: {}) { Text(viewModel.errorMsg)}
+        .alert("Whoops!", isPresented: $pManage.error, actions: {}) { Text(pManage.errorMsg)}
         .overlay { FullscreenLoading(show: $viewModel.loading)}
         
     }
     
     func signUpUser() {
-        
-        let pManage = ProfileManagement()
-        
         Task {
-            do {
-                try await viewModel.signUp(email: email, password: password)
-                try await pManage.updateUsername(newUsername: username)
-            } catch {
-                print("ERROR SIGNING IN: \(error.localizedDescription)")
-            }
+            await viewModel.signUp(email: email, password: password)
+            await pManage.updateUsername(newUsername: username)
         }
     }
     

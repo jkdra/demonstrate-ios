@@ -7,9 +7,38 @@
 
 import SwiftUI
 
+enum SignatureMethod { case draw, type }
+
+
 struct ConfirmSignView: View {
+    
+    @Environment(\.dismiss) private var dismiss
+    @State private var signMethod: SignatureMethod = .draw
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack {
+                Spacer()
+                
+                
+                Button("Sign this Petition") {
+                    
+                }
+                .primaryButton()
+            }
+            .safeAreaPadding()
+            .customNavBar("Sign Petition")
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                        .font(.custom("Unbounded", size: 14))
+                }
+            }
+        }
+    }
+    
+    func signPetiton() {
+        
     }
 }
 

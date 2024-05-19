@@ -10,6 +10,7 @@ import Supabase
 
 struct AccDelConfirm: View {
     
+    let viewModel = AuthenticationViewModel()
     @State private var confirmUsername = ""
     @State private var usernameToCompare = ""
     @Environment(\.dismiss) var dismiss
@@ -24,7 +25,7 @@ struct AccDelConfirm: View {
                 Text("Are you sure you know what you're doing?")
                     .headline()
                 
-                Label("**ALL** content associated with your account ever made will be deleted. This includes signatues, comments, and endorsements.", systemImage: "exclamationmark.triangle.fill")
+                Label("**ALL** content associated with your account ever made will be deleted.", systemImage: "exclamationmark.triangle.fill")
                     .footnotePage()
                 
                 Label("This is irreversable. We CANNOT bring back your account.", systemImage: "exclamationmark.triangle.fill")
@@ -35,11 +36,9 @@ struct AccDelConfirm: View {
                 
                 Spacer()
                 
-                Button("Delete Account") {
-                    
-                }
-                .secondaryButton(destructive: true)
-                .disableWithOpacity(confirmUsername != usernameToCompare)
+                Button("Delete Account") { AppSettingsManager().primaryButtonHaptic(); delAccount() }
+                    .secondaryButton(destructive: true)
+                    .disableWithOpacity(confirmUsername != usernameToCompare)
             }
             .task { await fetchUsernameToCompare() }
             .overlay {
@@ -55,12 +54,9 @@ struct AccDelConfirm: View {
             .padding()
         }
         .tint(.red)
-        
     }
     
     private func fetchUsernameToCompare() async {
-        
-        guard !confirmUsername.isEmpty else { return }
         
         do {
             let currentUser = try await auth.session.user
@@ -71,11 +67,16 @@ struct AccDelConfirm: View {
                 .execute()
                 .value
             
-            await MainActor.run {
-                usernameToCompare = fetchedUsername
-            }
+            await MainActor.run { usernameToCompare = fetchedUsername }
         } catch {
-            
+            dismiss()
+        }
+    }
+    
+    private func delAccount() {
+        Task {
+            await viewModel.deleteAccount()
+            dismiss()
         }
     }
 }

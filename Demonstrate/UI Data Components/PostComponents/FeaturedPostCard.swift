@@ -12,7 +12,7 @@ struct FeaturedPostCard: View {
     
     var viewModel = PostCardViewModel()
     
-    let imageURL = "earhlb"
+    let imageURL = ""
     
     var body: some View {
         
@@ -20,18 +20,18 @@ struct FeaturedPostCard: View {
             if let image = state.image {
                 image.resizable()
             } else {
-                Color(uiColor: .secondarySystemBackground)
+                Color(.accent)
                     .overlay(alignment: .trailing) {
                         Image(systemName: "star.fill")
                             .font(.system(size: 128))
                             .padding(.trailing, -24)
-                            .foregroundStyle(LinearGradient(colors: [.accentColor, .accentColor.opacity(0.3)], startPoint: .top, endPoint: .bottom))
+                            .foregroundStyle(LinearGradient(colors: [Color(uiColor: .systemBackground), Color(uiColor: .systemBackground).opacity(0.3)], startPoint: .top, endPoint: .bottom))
                     }
             }
         }
         .aspectRatio(contentMode: .fill)
         .containerRelativeFrame(.horizontal)
-        .frame(height: 316)
+        .frame(height: 284)
         .overlay(alignment: .bottomLeading) {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Title")
@@ -41,7 +41,7 @@ struct FeaturedPostCard: View {
             }
             .padding()
             .padding(.top)
-            .foregroundStyle(.primary)
+            .foregroundStyle(Color(uiColor: .systemBackground))
             .hAlign(.leading)
             .background {
                 if !imageURL.isEmpty { LinearGradient(colors: [.black.opacity(0.6), .clear], startPoint: .bottom, endPoint: .top) }
@@ -68,8 +68,9 @@ struct FeaturedPostCard: View {
                     Image(systemName: "ellipsis")
                     
                 }
-                .foregroundStyle(.primary)
+                
             }
+            .foregroundStyle(imageURL.isEmpty ? Color(uiColor: .systemBackground) : Color.primary)
             .padding(9)
             .background {
                 if !imageURL.isEmpty {

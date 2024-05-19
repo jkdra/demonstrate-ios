@@ -24,7 +24,7 @@ struct WelcomeView: View {
                 .primaryButton()
         }
         .navigationBarBackButtonHidden()
-        .padding()
+        .safeAreaPadding()
     }
 }
 
