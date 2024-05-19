@@ -19,11 +19,9 @@ struct PostCard: View {
                 .modifier(CustomTitlePostCard())
             
             Text("Summary\nSummary\nSummary")
+                .lineLimit(3, reservesSpace: true)
                 .modifier(CustomBodyPostCard())
             
-            Text("Post Info")
-                .bold()
-                .modifier(CustomBodyPostCard())
             Divider()
             HStack {
                 Circle()
@@ -33,7 +31,8 @@ struct PostCard: View {
                 
                 Spacer()
                 
-                Text("Footer")
+                Label("Post Info", systemImage: "person.2.fill")
+                    .bold()
                     .modifier(CustomFooterPostCard())
             }
             

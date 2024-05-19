@@ -13,6 +13,8 @@ import SwiftUI
 class ProfileManagement {
     
     var loading = false
+    var error = false
+    var errorMsg = ""
     
     @MainActor
     func saveProfile(newDispName: String, newBio: String, imageData: Data?) async -> Bool {
@@ -35,14 +37,14 @@ class ProfileManagement {
             print("Successful Update: \(updateStatus)")
             return true
         } catch {
-            print("ERROR UPDATING PROFILE: \(error.localizedDescription)")
+            print("ERROR UPDATING PROFILE: \(error)")
+            showError(errorMsg: error.localizedDescription)
             return false
         }
     }
     
-    func fetchProfile(with id: UUID, completion: @escaping (Profile) -> Void) async {
+    func fetchProfile(id: UUID, completion: @escaping (Profile) -> Void) async {
         do {
-            
             let fetchedProfile: Profile = try await database.from("profiles")
                 .select()
                 .eq("id", value: id)
@@ -52,25 +54,28 @@ class ProfileManagement {
             
             completion(fetchedProfile)
             
-        } catch {
-            print("ERROR FETCHING: \(error.localizedDescription)")
-        }
+        } catch { print("ERROR FETCHING: \(error)") }
     }
     
     
-    func updateUsername(newUsername: String) async throws {
+    func updateUsername(newUsername: String) async {
         loading = true
         defer { loading = false }
         guard !newUsername.isEmpty else { return }
         
-        let currentUser = try await auth.session.user
-        
-        let result = try await database.from("profiles")
-            .update(["username": newUsername])
-            .eq("id", value: currentUser.id)
-            .execute()
-        
-        print(result)
+        do {
+            let currentUser = try await auth.session.user
+            
+            let result = try await database.from("profiles")
+                .update(["username": newUsername])
+                .eq("id", value: currentUser.id)
+                .execute()
+            
+            print(result)
+        } catch {
+            print("ERROR UPDATING USERNAME: \(error)")
+            showError(errorMsg: error.localizedDescription)
+        }
     }
     
     func downloadImage(path: String, completionHandler: @escaping (Image?) -> Void) async throws {
@@ -94,6 +99,11 @@ class ProfileManagement {
             )
         
         return filePath
+    }
+    
+    private func showError(errorMsg: String) {
+        self.errorMsg = errorMsg
+        error = true
     }
     
     private func updateImage() async throws {

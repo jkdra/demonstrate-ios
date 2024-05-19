@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import Supabase
 
 struct NewUsernameView: View {
     
     let authViewModel = AuthenticationViewModel()
-    let pManagement = ProfileManagement()
+    let profileManagement = ProfileManagement()
     
     @Environment(\.dismiss) var dismiss
     @State private var usernameCheck: UsernameCheckStatus = .idle
@@ -18,6 +19,7 @@ struct NewUsernameView: View {
     
     var body: some View {
         VStack (alignment: .leading, spacing: 10) {
+            Divider()
             Text("Bet, let's set something new, given no one else has taken it.")
                 .headline()
             
@@ -78,11 +80,8 @@ struct NewUsernameView: View {
     
     func updateUsername() {
         Task {
-            do {
-                try await pManagement.updateUsername(newUsername: newUsernameInput)
-            } catch {
-                print("ERROR UPDATING USERNAME: \(error.localizedDescription)")
-            }
+            await profileManagement.updateUsername(newUsername: newUsernameInput)
+            dismiss()
         }
     }
 }

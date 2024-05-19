@@ -19,10 +19,6 @@ struct PostCardLoading: View {
                     .frame(width: 256, height: 14)
             }
             
-            Capsule()
-                .frame(width: 164, height: 14)
-                .padding(.top, 8)
-            
             Divider()
             
             HStack (spacing: 10) {
@@ -54,9 +50,6 @@ struct PostCardLoading: View {
                                 .frame(width: 256, height: 14)
                         }
                         
-                        Capsule()
-                            .frame(width: 164, height: 14)
-                            .padding(.top, 8)
                         
                         Divider()
                         

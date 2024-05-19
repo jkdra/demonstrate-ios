@@ -47,6 +47,18 @@ extension View {
     func bodyCard() -> some View {
         self.modifier(CustomBodyPostCard())
     }
+    
+    func sectionHeader() -> some View {
+        self.modifier(SectionHeaderStyle())
+    }
+}
+
+struct SectionHeaderStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("Unbounded-Regular_Bold", size: 20))
+            .hAlign(.leading)
+    }
 }
 
 struct FootnotePage: ViewModifier {

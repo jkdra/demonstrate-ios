@@ -9,27 +9,27 @@ import SwiftUI
 
 struct AccountSettingsView: View {
     
-    let authViewModel = AuthenticationViewModel()
+    @Bindable var authViewModel = AuthenticationViewModel()
     let pManagement = ProfileManagement()
     @State private var confirmAccDeletion = false
-    @State private var newEmailInput = ""
     
     var body: some View {
         NavigationStack {
             List {
-                
                 Section {
                     NavigationLink("Change Username") { NewUsernameView() }
+                        .onTapGesture {
+                            AppSettingsManager.shared.primaryButtonHaptic()
+                        }
                     
                     NavigationLink("Change Email") {
                         
                     }
+                    .onTapGesture { AppSettingsManager.shared.primaryButtonHaptic() }
+                    
+                    Button("Sign Out") { signOut() }
                     
                     
-//                    TextField("New Email", text: $newEmailInput)
-//                        .textContentType(.emailAddress)
-//                        .autocorrectionDisabled()
-//                        .textInputAutocapitalization(.never)
                     
                 } header: {
                     Text("General")
@@ -38,6 +38,7 @@ struct AccountSettingsView: View {
                 
                 Section {
                     Button("Delete Account", role: .destructive) {
+                        AppSettingsManager.shared.primaryButtonHaptic()
                         confirmAccDeletion = true
                     }
                 } header: {
@@ -48,6 +49,15 @@ struct AccountSettingsView: View {
             .customNavBar("Account")
         }
         .font(.custom("Unbounded", size: 14))
+        .overlay {FullscreenLoading(show: $authViewModel.loading)}
+        .alert("Oop!", isPresented: $authViewModel.error) {} message: { Text(authViewModel.errorMsg) }
+        .sheet(isPresented: $confirmAccDeletion) { AccDelConfirm() }
+    }
+    
+    private func signOut() {
+        Task {
+            await authViewModel.signOut()
+        }
     }
 }
 
