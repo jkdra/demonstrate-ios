@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Supabase
 import Auth
 
 struct AccountSettingsView: View {
@@ -15,7 +16,7 @@ struct AccountSettingsView: View {
     @State private var changeUsername = false
     @State private var confirmAccDeletion = false
     @State private var appleLinked = true
-    @State private var googleLinked = false
+    @State private var googleLinked = true
     
     var body: some View {
         List {
@@ -35,60 +36,60 @@ struct AccountSettingsView: View {
                     .font(.custom("Unbounded", size: 12))
             }
             
-//                Section {
-//                    HStack (spacing: 12){
-//                        Image("googlelogo")
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fill)
-//                            .frame(width: 16, height: 16)
-//
-//                        Text("Google")
-//
-//                        Spacer()
-//                        if !googleLinked {
-//                            Button("Link Account") {
-//
-//                            }
-//                        } else {
-//                            Menu("Linked") {
-//                                Button("Unlink", role: .destructive) {
-//
-//                                }
-//                            }
-//                            .foregroundStyle(.secondary)
-//                        }
-//                    }
-//
-//                    HStack (spacing: 16){
-//                        Image(systemName: "applelogo")
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fill)
-//                            .frame(width: 14, height: 14)
-//
-//                        Text("Apple")
-//
-//                        Spacer()
-//
-//                        if !appleLinked {
-//                            Button("Link Account") {
-//
-//                            }
-//                        } else {
-//                            Menu("Linked") {
-//                                Button("Unlink", role: .destructive) {
-//
-//                                }
-//                            }
-//                            .foregroundStyle(.secondary)
-//                        }
-//
-//
-//                    }
-//
-//                } header: {
-//                    Text("Linked Accounts")
-//                        .font(.custom("Unbounded", size: 12))
-//                }
+                Section {
+                    HStack (spacing: 12){
+                        Image("googlelogo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 16, height: 16)
+
+                        Text("Google")
+
+                        Spacer()
+                        if !googleLinked {
+                            Button("Link Account") {
+
+                            }
+                        } else {
+                            Menu("Linked") {
+                                Button("Unlink", role: .destructive) {
+
+                                }
+                            }
+                            .foregroundStyle(.secondary)
+                        }
+                    }
+
+                    HStack (spacing: 16){
+                        Image(systemName: "applelogo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 14, height: 14)
+
+                        Text("Apple")
+
+                        Spacer()
+
+                        if !appleLinked {
+                            Button("Link Account") {
+
+                            }
+                        } else {
+                            Menu("Linked") {
+                                Button("Unlink", role: .destructive) {
+
+                                }
+                            }
+                            .foregroundStyle(.secondary)
+                        }
+
+
+                    }
+
+                } header: {
+                    Text("Linked Accounts")
+                        .font(.custom("Unbounded", size: 12))
+                }
             
             Section {
                 Button("Delete Account", role: .destructive) { confirmAccDeletion = true }
@@ -102,11 +103,44 @@ struct AccountSettingsView: View {
         .overlay {FullscreenLoading(show: $authViewModel.loading)}
         .alert("Oop!", isPresented: $authViewModel.error) {} message: { Text(authViewModel.errorMsg) }
         .sheet(isPresented: $confirmAccDeletion) { AccDelConfirm() }
+        .task { await fetchIdentities() }
         
     }
     
     private func signOut() {
         Task { await authViewModel.signOut() }
+    }
+    
+    private func fetchIdentities() async {
+        do {
+            let identities = try await auth.userIdentities()
+            
+            googleLinked = identities.contains(where: { $0.provider == Provider.google.rawValue })
+            appleLinked = identities.contains(where: { $0.provider == Provider.apple.rawValue })
+            
+            if let googleIdentity = identities.first(where: { $0.provider == Provider.google.rawValue }) {
+                print("Google Identity: \(googleIdentity)")
+                googleLinked = true
+            } else {
+                googleLinked = false
+            }
+            
+            if let appleIdentity = identities.first(where: { $0.provider == Provider.apple.rawValue }) {
+                print("Apple Identity: \(appleIdentity)")
+                appleLinked = true
+            } else {
+                appleLinked = false
+            }
+            
+            if identities.contains(where: { $0.provider == "google"}) {
+                googleLinked = true
+            } else {
+                googleLinked = false
+            }
+            
+        } catch {
+            
+        }
     }
     
 //    private func fetchIdentities() async {

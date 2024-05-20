@@ -9,35 +9,25 @@ import Foundation
 import SwiftUI
 
 enum TabBarItem: Hashable {
-    case home, search, newpost, activity, profile
+    case home, search, newPost, activity, profile
     
     var iconName: String {
         switch self {
-        case .home:
-            return "demo.home"
-        case .search:
-            return "magnifyingglass"
-        case .newpost:
-            return "plus"
-        case .activity:
-            return "bell.fill"
-        case .profile:
-            return "person.crop.circle.fill"
+        case .home: "demo.home"
+        case .search: "magnifyingglass"
+        case .newPost: "plus"
+        case .activity: "bell.fill"
+        case .profile: "person.crop.circle.fill"
         }
     }
     
     var title: String {
         switch self {
-        case .home:
-            return "Home"
-        case .search:
-            return "Search"
-        case .newpost:
-            return "Post"
-        case .activity:
-            return "Activity"
-        case .profile:
-            return "Profile"
+        case .home: "Home"
+        case .search: "Search"
+        case .newPost: "Post"
+        case .activity: "Activity"
+        case .profile: "Profile"
         }
     }
 }
@@ -45,7 +35,7 @@ enum TabBarItem: Hashable {
 struct TabBarView: View {
     
     @Namespace var namespace
-    @State private var newPost: Bool = false
+    @State private var newPost = false
     
     let tabs: [TabBarItem]
     @Binding var selection: TabBarItem
@@ -58,10 +48,10 @@ struct TabBarView: View {
                     tabView(tab: tab)
                         .onChange(of: selection) {
                             withAnimation(.snappy(duration: 0.3, extraBounce: 0.05)) {
-                                if tab != .newpost { localSelection = selection }
+                                if tab != .newPost { localSelection = selection }
                             }
                         }
-                        .onTapGesture { if tab != .newpost { switchTab(tab: tab) } }
+                        .onTapGesture { if tab != .newPost { selection = tab } }
                 }
             }
             .padding(.vertical, 2)
@@ -76,29 +66,24 @@ extension TabBarView {
             if tab.title != "Post" {
                 if localSelection == tab {
                     Capsule()
-                        .frame(width: 20, height: 3)
-                        .shadow(color: .accentColor.opacity(0.5), radius: 2)
+                        .frame(width: 20, height: 2)
+                        .shadow(color: .accentColor.opacity(0.7), radius: 2)
                         .matchedGeometryEffect(id: "SelectedTab", in: namespace)
                 } else {
                     Capsule()
                         .foregroundStyle(.clear)
-                        .frame(width: 16, height: 3)
+                        .frame(width: 16, height: 2)
                     
                 }
-                if tab.title != "Home" {
-                    Image(systemName: tab.iconName)
-                        .font(.title3)
-                } else {
-                    Image(tab.iconName)
-                        .font(.title3)
-                }
+                Group { tab.title != "Home" ? Image(systemName: tab.iconName) : Image(tab.iconName) }
+                    .font(.title2)
+                
                 Text(tab.title)
-                    .font(.custom("Unbounded", size: 10))
+                    .font(.custom("Unbounded", size: 9))
                 
             } else {
-                Button {
-                    newPost = true
-                } label: {
+                Button { newPost = true }
+                label: {
                     Image(systemName: tab.iconName)
                         .foregroundStyle(.tint)
                         .bold()
@@ -108,12 +93,11 @@ extension TabBarView {
                     LinearGradient(
                         colors: [.white.opacity(0.2), .black.opacity(0.2)],
                         startPoint: .top,
-                        endPoint: .bottom
-                    ),
-                    in: .circle
-                        .stroke(lineWidth: 3)
+                        endPoint: .bottom),
+                    in: .circle.stroke(lineWidth: 6)
                 )
                 .background(.regularMaterial, in: .circle)
+                .clipShape(.circle)
                 
                 
             }
@@ -122,15 +106,11 @@ extension TabBarView {
         .frame(maxWidth: .infinity)
         .sheet(isPresented: $newPost) { PostTypeView(isPresented: $newPost) }
     }
-    
-    private func switchTab(tab: TabBarItem) { selection = tab }
 }
 
 struct TabBar_Preview: PreviewProvider {
     
-    static let tabs: [TabBarItem] = [
-        .home, .search, .newpost, .activity, .profile
-    ]
+    static let tabs: [TabBarItem] = [ .home, .search, .newPost, .activity, .profile ]
     
     static var previews: some View {
         VStack {

@@ -65,9 +65,7 @@ struct SettingsView: View {
             }
             .customNavBar("Settings")
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Close") { dismiss() }
-                }
+                ToolbarItem(placement: .cancellationAction) { Button("Close") { dismiss() } }
             }
 //            .toolbarTitleDisplayMode(.inline)
             .font(.custom("Unbounded", size: 14))

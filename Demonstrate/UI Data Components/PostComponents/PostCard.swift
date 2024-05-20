@@ -47,7 +47,9 @@ struct PostCard: View {
                         RadialGradient(colors: [.white, .clear], center: .topTrailing, startRadius: 0, endRadius: 192)
                     }
                     .hAlign(.trailing)
+                    
             }
+            .clipShape(.rect(cornerRadius: 14))
         }
         .foregroundStyle(.primary)
         .overlay(alignment: .topTrailing) {
@@ -69,7 +71,6 @@ struct PostCard: View {
             }
             .foregroundStyle(.primary)
         }
-        .clipShape(.rect(cornerRadius: 14))
         .contextMenu {
             Button("View Author") {
                 

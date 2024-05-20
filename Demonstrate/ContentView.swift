@@ -13,16 +13,16 @@ struct ContentView: View {
     
     var body: some View {
         MainView()
+            .task { await authViewModel.isUserAuthenticated() }
             .fullScreenCover(isPresented: $authViewModel.showOnboarding) {
                 OnboardingScreen(isPresented: $authViewModel.showOnboarding)
             }
-            .task { await authViewModel.isUserAuthenticated() }
     }
 }
 
 struct MainView: View {
     
-    let tabs: [TabBarItem] = [.home, .activity, .newpost, .search, .profile]
+    let tabs: [TabBarItem] = [.home, .activity, .newPost, .search, .profile]
     @State private var currentTab: TabBarItem = .home
     
     var body: some View {
@@ -39,9 +39,7 @@ struct MainView: View {
             Text("Profile")
                 .tag(TabBarItem.profile)
         }
-        .overlay(alignment: .bottom) {
-            TabBarView(tabs: tabs, selection: $currentTab, localSelection: currentTab)
-        }
+        .overlay(alignment: .bottom) { TabBarView(tabs: tabs, selection: $currentTab, localSelection: currentTab) }
     }
 }
 

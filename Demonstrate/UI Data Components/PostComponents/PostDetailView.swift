@@ -15,6 +15,11 @@ struct PostDetailView: View {
     @State private var showHeader = false
     @State private var editPost = false
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.verticalSizeClass) private var heightClass
+    @Environment(\.horizontalSizeClass) private var widthClass
+    
+    var iphoneView: Bool { heightClass == .regular && widthClass == .compact ? true : false }
+    
     
     init(post: any Post = Petition.petition1()) {
         viewModel = PostDetailViewModel(post: post)
@@ -58,8 +63,14 @@ struct PostDetailView: View {
                 }
                 
             }
-            
-            VStack(alignment: .leading, spacing: 12) {
+            Grid(alignment: .center) {
+                
+                ForEach(0..<50) { _ in
+                    Text("Hello")
+                }
+                
+            }
+            VStack(spacing: 12) {
                 
                 Text("Fugiat elit proident culpa laborum nostrud culpa veniam esse nisi irure aute anim esse magna culpa.")
                     .bodyPage()
@@ -123,6 +134,7 @@ struct PostDetailView: View {
                         .sectionHeader()
                 }
             }
+            
             .safeAreaPadding(.horizontal)
         }
         .overlay(alignment: .top) { header }

@@ -65,12 +65,10 @@ struct ProfileDetailView: View {
                         Section {
                             ForEach(0..<3) { _ in
                                 PostCard()
-                                    .padding(.vertical, -10)
                             }
                         } header: {
                             Text("Posts by this user:")
                                 .sectionHeader()
-                                .padding(.bottom, -12)
                         }
                     }
                 }

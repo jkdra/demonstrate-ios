@@ -12,7 +12,7 @@ import PhotosUI
 struct EditPostView: View {
     
     @Bindable private var viewModel = PostManagementViewModel()
-    @State var postToEdit: any Post = Event.event1()
+    @State var postToEdit: any Post = Petition.petition1()
     @State private var photoItem: PhotosPickerItem?
     @State private var imageData: Data?
     @State private var signatureGoal = ""

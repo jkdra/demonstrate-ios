@@ -27,7 +27,6 @@ struct EditProfileView: View {
                     .headline()
                     .hAlign(.leading)
                 
-                
                 PhotosPicker(selection: $photoItem, matching: .images) {
                     LazyImage(url: URL(string: loadImageURL(imgPath: profileToEdit.imageURL))) { state in
                         if let imageData = imgData, let uiimg = UIImage(data: imageData) {
