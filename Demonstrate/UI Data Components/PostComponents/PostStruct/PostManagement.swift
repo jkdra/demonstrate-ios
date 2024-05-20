@@ -10,6 +10,43 @@ import PhotosUI
 import Supabase
 import SwiftUI
 
+enum PostManagementError: LocalizedError {
+    case uploadFailed
+    case archiveFailed
+    case deleteFailed
+    case signatureFailed
+    case endorsementFailed
+    case interestFailed
+    
+    var errorTitle: String? {
+        switch self {
+        case .uploadFailed: "Upload Failed"
+        case .archiveFailed: "Archive Failed"
+        case .deleteFailed: "Delete Failed"
+        case .signatureFailed: "Signature Failed"
+        case .endorsementFailed: "Endorsement Failed"
+        case .interestFailed: "Interest Failed"
+        }
+    }
+    
+    var errorDescription: String? {
+        switch self {
+        case .uploadFailed:
+            "So your post decided not to cooperate... Please try again."
+        case .archiveFailed:
+            "Damn, this post must really love the attention. In all seriousness though something went wrong."
+        case .deleteFailed:
+            "Something went wrong while deleting your post. Please try again."
+        case .signatureFailed:
+            "Something went wrong while signing your post. Please try again."
+        case .endorsementFailed:
+            "Something went wrong while endorsing your post. Please try again."
+        case .interestFailed:
+            "Something went wrong while interest your post. Please try again."
+        }
+    }
+}
+
 @Observable
 class PostManagementViewModel {
     

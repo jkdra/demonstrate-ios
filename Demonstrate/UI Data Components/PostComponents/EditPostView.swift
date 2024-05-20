@@ -44,7 +44,7 @@ struct EditPostView: View {
                     }
                 }
                 .aspectRatio(contentMode: .fill)
-                .frame(width: UIScreen.main.bounds.width * 0.915, height: 256)
+                .frame(height: 256)
                 .clipShape(.rect(cornerRadius: 14))
                 .onChange(of: photoItem) { if let photoItem { updateData(from: photoItem) } }
                 
@@ -65,7 +65,7 @@ struct EditPostView: View {
                     .onAppear { newStart = event.startsAt; newEnd = event.endsAt }
                     .onChange(of: newStart) { event.startsAt = newStart; postToEdit = event }
                     .onChange(of: newEnd) { event.endsAt = newEnd; postToEdit = event }
-                } else if let petition = postToEdit as? Petition {
+                } else if postToEdit is Petition {
                     TextField("Signature Goal", text: $signatureGoal)
                         .modifier(CustomTextFieldStyle())
                 }
@@ -94,7 +94,7 @@ struct EditPostView: View {
                             Rectangle()
                                 .foregroundStyle(.regularMaterial)
                                 .mask {
-                                    LinearGradient(colors: [.white, .clear], startPoint: .center, endPoint:     .top)
+                                    LinearGradient(colors: [.white, .clear], startPoint: .center, endPoint: .top)
                                 }
                                 .ignoresSafeArea()
                         }
