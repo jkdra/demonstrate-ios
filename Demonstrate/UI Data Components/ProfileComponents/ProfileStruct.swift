@@ -21,4 +21,8 @@ struct Profile: Codable, Identifiable, Hashable {
         case imageURL = "image_url"
     }
     
+    
+    static func profile1() -> Profile {
+        .init(username: "jawadalkhadra", displayName: "Jawad Khadra", biography: "This is a biography to make sure the profile page works correctly.", imageURL: "")
+    }
 }

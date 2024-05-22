@@ -33,7 +33,6 @@ struct SignUpView: View {
                 Button("Sign Up") { AppSettingsManager().primaryButtonHaptic(); signUpUser() }
                     .primaryButton()
                     .disableWithOpacity(usernameCheck != .available || email.isEmpty || password.isEmpty)
-                
             }
         }
         .overlay {
@@ -44,10 +43,7 @@ struct SignUpView: View {
                     .footnotePage()
                 
                 TextField("Username", text: $username)
-                    .textContentType(.username)
-                    .autocorrectionDisabled()
-                    .textInputAutocapitalization(.never)
-                    .modifier(CustomTextFieldStyle())
+                    .usernameField()
                     .focused($focus)
                     .foregroundStyle(usernameCheck.statusColor?.opacity(10) ?? .primary)
                     .overlay(alignment: .trailing) {
@@ -63,7 +59,6 @@ struct SignUpView: View {
                         .foregroundStyle(usernameCheck.statusColor ?? .primary)
                         .bold()
                         .padding(.trailing)
-                        
                     }
                     .onChange(of: username) {
                         usernameCheck = .checking
@@ -105,7 +100,6 @@ struct SignUpView: View {
             }
         }
         .padding()
-        .navigationBarBackButtonHidden()
         .alert("Whoops!", isPresented: $viewModel.error, actions: {}) { Text(viewModel.errorMsg)}
         .alert("Whoops!", isPresented: $pManage.error, actions: {}) { Text(pManage.errorMsg)}
         .overlay { FullscreenLoading(show: $viewModel.loading)}
@@ -120,7 +114,7 @@ struct SignUpView: View {
     }
     
     @MainActor
-    func checkUsername() { viewModel.checkUsername(usernameInput: username) { usernameCheck = $0 } }
+    func checkUsername() { viewModel.checkUsername(username: username) { usernameCheck = $0 } }
 }
 
 #Preview {

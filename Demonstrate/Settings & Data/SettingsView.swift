@@ -21,7 +21,7 @@ struct SettingsView: View {
                         Text("System").tag(AppTheme.system)
                         Text("Light").tag(AppTheme.light)
                         Text("Dark").tag(AppTheme.dark)
-                        }
+                    }
                     
                     HStack {
                         Text("App Icons")
@@ -67,7 +67,6 @@ struct SettingsView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("Close") { dismiss() } }
             }
-//            .toolbarTitleDisplayMode(.inline)
             .font(.custom("Unbounded", size: 14))
             .preferredColorScheme(settingsManager.appTheme.themePreference)
         }

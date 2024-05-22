@@ -71,21 +71,14 @@ struct AccountSettingsView: View {
                         Spacer()
 
                         if !appleLinked {
-                            Button("Link Account") {
-
-                            }
+                            Button("Link Account") { appleLinked = true }
                         } else {
                             Menu("Linked") {
-                                Button("Unlink", role: .destructive) {
-
-                                }
+                                Button("Unlink", role: .destructive) { appleLinked = false }
                             }
                             .foregroundStyle(.secondary)
                         }
-
-
                     }
-
                 } header: {
                     Text("Linked Accounts")
                         .font(.custom("Unbounded", size: 12))
@@ -97,47 +90,23 @@ struct AccountSettingsView: View {
                 Text("Danger Zone")
                     .font(.custom("Unbounded", size: 12))
             }
+            .task { await fetchIdentities() }
         }
         .customNavBar("Account")
         .font(.custom("Unbounded", size: 14))
         .overlay {FullscreenLoading(show: $authViewModel.loading)}
         .alert("Oop!", isPresented: $authViewModel.error) {} message: { Text(authViewModel.errorMsg) }
         .sheet(isPresented: $confirmAccDeletion) { AccDelConfirm() }
-        .task { await fetchIdentities() }
         
     }
     
-    private func signOut() {
-        Task { await authViewModel.signOut() }
-    }
+    private func signOut() { Task { await authViewModel.signOut() } }
     
     private func fetchIdentities() async {
         do {
             let identities = try await auth.userIdentities()
-            
-            googleLinked = identities.contains(where: { $0.provider == Provider.google.rawValue })
-            appleLinked = identities.contains(where: { $0.provider == Provider.apple.rawValue })
-            
-            if let googleIdentity = identities.first(where: { $0.provider == Provider.google.rawValue }) {
-                print("Google Identity: \(googleIdentity)")
-                googleLinked = true
-            } else {
-                googleLinked = false
-            }
-            
-            if let appleIdentity = identities.first(where: { $0.provider == Provider.apple.rawValue }) {
-                print("Apple Identity: \(appleIdentity)")
-                appleLinked = true
-            } else {
-                appleLinked = false
-            }
-            
-            if identities.contains(where: { $0.provider == "google"}) {
-                googleLinked = true
-            } else {
-                googleLinked = false
-            }
-            
+            googleLinked = identities.contains { $0.provider == "google" }
+            appleLinked = identities.contains { $0.provider == "google" }
         } catch {
             
         }

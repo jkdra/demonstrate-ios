@@ -10,55 +10,106 @@ import SwiftUI
 struct ProfileLoading: View {
     var body: some View {
         NavigationStack {
-            ShimmerEffect()
-                .customNavBar("___")
-                .mask {
-                    ScrollView {
-                        VStack (alignment: .leading, spacing: 12) {
-                            HStack (spacing: 12){
-                                Circle()
-                                    .frame(width: 84, height: 84)
-                                
-                                VStack(alignment: .leading, spacing: 10) {
-                                    Capsule()
-                                        .frame(width: 164, height: 20)
-                                    
-                                    Capsule()
-                                        .frame(width: 124, height: 14)
-                                    
-                                    HStack {
-                                        Capsule()
-                                            .frame(width: 92, height: 12)
-                                        
-                                        Divider()
-                                        
-                                        Capsule()
-                                            .frame(width: 92, height: 12)
-                                    }
-                                }
-                            }
+            ScrollView {
+                VStack (alignment: .leading, spacing: 12) {
+                    HStack {
+                        Circle()
+                            .frame(width: 84, height: 84)
+                        
+                        VStack (alignment: .leading) {
+                            Capsule()
+                                .frame(width: 164, height: 20)
                             
-                            Button("") {
-                                
-                            }
-                            .primaryButton()
+                            Capsule()
+                                .frame(width: 124, height: 14)
                             
-                            ForEach(0..<3) { index in
+                            HStack {
                                 Capsule()
-                                    .frame(width: 256 / (CGFloat(index) * 1), height: 14)
-                            }
-                            
-                            ForEach(0..<3) { index in
-                                PostCardLoading()
+                                    .frame(width: 92, height: 12)
+                                
+                                Divider()
+                                    .frame(height: 24)
+                                
+                                Capsule()
+                                    .frame(width: 92, height: 12)
                             }
                         }
-                        .safeAreaPadding(.top, 142)
                     }
-                    .disabled(true)
-                    .padding()
+                    
+                    Button(" ") {
+                        
+                    }
+                    .primaryButton()
+                    
+                    ForEach(1..<4) { index in
+                        Capsule()
+                            .frame(width: 284 / Double(index), height: 14)
+                    }
+                    
+                    Section {
+                        ForEach(0..<5) { _ in PostCard() }
+                    } header: {
+                        Capsule()
+                            .frame(width: 256, height: 14)
+                            .padding(.top)
+                    }
+                    
                 }
-                .ignoresSafeArea()
-                
+                .opacity(0)
+                .overlay {
+                    ShimmerEffect()
+                        .mask {
+                            ScrollView {
+                                VStack (alignment: .leading, spacing: 12) {
+                                    HStack {
+                                        Circle()
+                                            .frame(width: 84, height: 84)
+                                        
+                                        VStack (alignment: .leading) {
+                                            Capsule()
+                                                .frame(width: 164, height: 20)
+                                            
+                                            Capsule()
+                                                .frame(width: 124, height: 14)
+                                            
+                                            HStack {
+                                                Capsule()
+                                                    .frame(width: 92, height: 12)
+                                                
+                                                Divider()
+                                                    .frame(height: 24)
+                                                
+                                                Capsule()
+                                                    .frame(width: 92, height: 12)
+                                            }
+                                        }
+                                    }
+                                    
+                                    Button(" ") {
+                                        
+                                    }
+                                    .primaryButton()
+                                    
+                                    ForEach(1..<4) { index in
+                                        Capsule()
+                                            .frame(width: 284 / CGFloat(index), height: 14)
+                                    }
+                                    
+                                    Section {
+                                        ForEach(0..<5) { _ in PostCard() }
+                                    } header: {
+                                        Capsule()
+                                            .frame(width: 256, height: 14)
+                                            .padding(.top)
+                                    }
+                                    
+                                }
+                            }
+                        }
+                }
+                .safeAreaPadding()
+            }
+            .customNavBar("___")
         }
     }
 }

@@ -74,7 +74,7 @@ struct NewUsernameView: View {
     
     @MainActor
     func checkUsername() {
-        authViewModel.checkUsername(usernameInput: newUsernameInput) { usernameCheck = $0 }
+        authViewModel.checkUsername(username: newUsernameInput) { usernameCheck = $0 }
     }
     
     func updateUsername() {

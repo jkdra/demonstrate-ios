@@ -134,6 +134,7 @@ final class AuthenticationViewModel {
         
         return hashString
     }
+    
     func randomNonceString(length: Int = 32) -> String {
         precondition(length > 0)
         let charset: [Character] =
@@ -177,11 +178,8 @@ final class AuthenticationViewModel {
     }
     
     @MainActor
-    func checkUsername(usernameInput: String, completion: @escaping (UsernameCheckStatus) -> Void) {
+    func checkUsername(username: String, completion: @escaping (UsernameCheckStatus) -> Void) {
         Task {
-            
-            let username = usernameInput.lowercased()
-            
             do {
                 // First check for minimum length
                 if username.count < 3 {
@@ -194,11 +192,10 @@ final class AuthenticationViewModel {
                 let regexTestValidChars = NSPredicate(format:"SELF MATCHES %@", regexValidChars)
                 
                 if !regexTestValidChars.evaluate(with: username) {
-                    if username.first?.isLetter == false || username.last?.isLetter == false {
-                        completion(.invalidStartEnd)
-                    } else {
-                        completion(.invalidCharacters)
-                    }
+                    username.first?.isLetter == false || username.last?.isLetter == false 
+                    ? completion(.invalidStartEnd)
+                    : completion(.invalidCharacters)
+                   
                     return
                 }
                 
@@ -214,7 +211,7 @@ final class AuthenticationViewModel {
                 // Return the appropriate status based on whether the username is taken
                 if isUsernameTaken {
                     completion(.taken)
-                } else if usernameInput.isEmpty {
+                } else if username.isEmpty {
                     completion(.idle)
                 } else {
                     completion(.available)

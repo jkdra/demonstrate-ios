@@ -11,6 +11,8 @@ import Supabase
 struct ProfileDetailView: View {
     
     @State var viewModel: ProfileDetailsViewModel
+    @State private var showSettings = false
+    @State private var editProfile = false
     
     init(profileID: UUID) { self.viewModel = ProfileDetailsViewModel(profileID: profileID) }
     
@@ -51,12 +53,10 @@ struct ProfileDetailView: View {
                             }
                             .secondaryButton()
                         } else {
-                            Button("Edit Profile", systemImage: "square.and.pencil") {
-                                
-                            }
-                            .secondaryButton()
+                            Button("Edit Profile", systemImage: "square.and.pencil") { editProfile = true }
+                                .secondaryButton()
+                                .sheet(isPresented: $editProfile) { EditProfileView() }
                         }
-                        
                         
                         
                         Text("Biography")
@@ -76,16 +76,17 @@ struct ProfileDetailView: View {
                 .customNavBar((!profile.displayName.isEmpty ? profile.displayName : profile.username) ?? "")
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
-                        ShareLink(item: "Hello!") {
-                            Label("Share", systemImage: "square.and.arrow.up")
-                        }
+                        Text("")
                     }
                     
-                    if viewModel.viewingSelf {
-                        ToolbarItem(placement: .secondaryAction) {
-                            Button("Settings") {
-                                
-                            }
+                    ToolbarItem(placement: .secondaryAction) {
+                        Button("Settings") { showSettings = true }
+                            .sheet(isPresented: $showSettings) { SettingsView() }
+                    }
+                    
+                    ToolbarItem(placement: .secondaryAction) {
+                        Button("Report User", role: .destructive) {
+                            
                         }
                     }
                     
@@ -99,7 +100,7 @@ struct ProfileDetailView: View {
 class ProfileDetailsViewModel {
     
     let profileID: UUID
-    var profile: Profile? = .init(username: "hello", displayName: "Hello", biography: "", imageURL: "")
+    var profile: Profile? = Profile.profile1()
     var errAlert = false
     var alreadyFollowing = false
     var viewingSelf = false

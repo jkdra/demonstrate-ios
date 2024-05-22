@@ -86,7 +86,7 @@ struct OAuthUsername: View {
     }
     
     @MainActor
-    func checkUsername() { viewModel.checkUsername(usernameInput: username) { usernameCheck = $0 } }
+    func checkUsername() { viewModel.checkUsername(username: username) { usernameCheck = $0 } }
 }
 
 #Preview {

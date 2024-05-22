@@ -12,7 +12,7 @@ struct PostCard: View {
         NavigationLink {
             
         } label: {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 10) {
                 Text("Title")
                     .modifier(CustomTitlePostCard())
                 
@@ -33,7 +33,6 @@ struct PostCard: View {
                         .bold()
                         .modifier(CustomFooterPostCard())
                 }
-                
             }
             .padding()
             .background(alignment: .trailing) {
@@ -53,7 +52,6 @@ struct PostCard: View {
         }
         .foregroundStyle(.primary)
         .overlay(alignment: .topTrailing) {
-
             Menu {
                 Button("View Author") {
                     
@@ -63,11 +61,11 @@ struct PostCard: View {
                 }
             } label: {
                 Image(systemName: "ellipsis")
-                    .padding(9)
+                    .padding(8)
                     .bold()
                     .background(.regularMaterial, in: .circle)
                     .padding(.trailing, -6)
-                    .padding(10)
+                    .padding(8)
             }
             .foregroundStyle(.primary)
         }
@@ -79,6 +77,7 @@ struct PostCard: View {
                 
             }
         }
+        .frame(maxWidth: 512)
     }
 }
 

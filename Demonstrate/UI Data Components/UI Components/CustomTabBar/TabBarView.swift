@@ -34,6 +34,10 @@ enum TabBarItem: Hashable {
 
 struct TabBarView: View {
     
+    
+    @Environment(\.verticalSizeClass) private var heightClass
+    @Environment(\.horizontalSizeClass) private var widthClass
+    
     @Namespace var namespace
     @State private var newPost = false
     
@@ -62,27 +66,42 @@ struct TabBarView: View {
 extension TabBarView {
     
     private func tabView(tab: TabBarItem) -> some View {
+        
+        
         VStack (spacing: 4) {
+            
+            let layout = (widthClass == .regular)
+            ? AnyLayout(HStackLayout())
+            : AnyLayout(VStackLayout(spacing: 4))
+            
             if tab.title != "Post" {
-                if localSelection == tab {
-                    Capsule()
-                        .frame(width: 20, height: 2)
-                        .shadow(color: .accentColor.opacity(0.7), radius: 2)
-                        .matchedGeometryEffect(id: "SelectedTab", in: namespace)
-                } else {
-                    Capsule()
-                        .foregroundStyle(.clear)
-                        .frame(width: 16, height: 2)
-                    
+                if widthClass != .regular {
+                    if localSelection == tab {
+                        Capsule()
+                            .frame(width: 24, height: 2)
+                            .shadow(color: .accentColor.opacity(0.7), radius: 2)
+                            .matchedGeometryEffect(id: "SelectedTab", in: namespace)
+                    } else {
+                        Capsule()
+                            .foregroundStyle(.clear)
+                            .frame(width: 24, height: 2)
+                        
+                    }
                 }
-                Group { tab.title != "Home" ? Image(systemName: tab.iconName) : Image(tab.iconName) }
-                    .font(.title2)
+                layout {
+                    Group { tab.title != "Home" ? Image(systemName: tab.iconName) : Image(tab.iconName) }
+                        .font(.title2)
+                    
+                    Text(tab.title)
+                        .font(.custom("Unbounded", size: 9))
+                }
                 
-                Text(tab.title)
-                    .font(.custom("Unbounded", size: 9))
                 
             } else {
-                Button { newPost = true }
+                Button {
+                    AppSettingsManager().primaryButtonHaptic()
+                    newPost = true
+                }
                 label: {
                     Image(systemName: tab.iconName)
                         .foregroundStyle(.tint)
@@ -98,8 +117,6 @@ extension TabBarView {
                 )
                 .background(.regularMaterial, in: .circle)
                 .clipShape(.circle)
-                
-                
             }
         }
         .foregroundStyle(localSelection == tab ? Color.accentColor : .secondary)
