@@ -6,25 +6,35 @@
 //
 
 import SwiftUI
+import NukeUI
 import Supabase
 
 struct ProfileDetailView: View {
     
     @State var viewModel: ProfileDetailsViewModel
+    @State private var properImgURL: URL?
     @State private var showSettings = false
     @State private var editProfile = false
     
-    init(profileID: UUID) { self.viewModel = ProfileDetailsViewModel(profileID: profileID) }
+    init(profileID: UUID) { viewModel = ProfileDetailsViewModel(profileID: profileID) }
     
     var body: some View {
         NavigationStack {
-            
             if let profile = viewModel.profile {
                 ScrollView {
                     LazyVStack(alignment: .leading, spacing: 16) {
                         HStack(alignment: .center, spacing: 12) {
-                            Circle()
-                                .frame(width: 84, height: 84)
+                            LazyImage(url: properImgURL ?? URL(string: "")) { state in
+                                if let image = state.image {
+                                    image.resizable()
+                                } else if state.error != nil {
+                                    Image("NoPFP")
+                                        .resizable()
+                                } else { ShimmerEffect() }
+                            }
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 84, height: 84)
+                            .clipShape(.circle)
                             
                             VStack (alignment: .leading, spacing: 4) {
                                 
@@ -40,12 +50,14 @@ struct ProfileDetailView: View {
                             }
                         }
                         
-                        if !viewModel.viewingSelf && !viewModel.alreadyFollowing {
-                            Button("Follow", systemImage: "plus.circle.fill") {
-                                
+                        if viewModel.viewingSelf {
+                            Button("Edit Profile", systemImage: "square.and.pencil") {
+                                settingManager.primaryButtonHaptic()
+                                editProfile = true
                             }
-                            .primaryButton()
-                        } else if !viewModel.viewingSelf && viewModel.alreadyFollowing {
+                            .secondaryButton()
+                            .sheet(isPresented: $editProfile) { EditProfileView() }
+                        } else if viewModel.alreadyFollowing {
                             Menu("Following", systemImage: "checkmark.circle.fill") {
                                 Button("Unfollow", role: .destructive) {
                                     
@@ -53,19 +65,37 @@ struct ProfileDetailView: View {
                             }
                             .secondaryButton()
                         } else {
-                            Button("Edit Profile", systemImage: "square.and.pencil") { editProfile = true }
-                                .secondaryButton()
-                                .sheet(isPresented: $editProfile) { EditProfileView() }
+                            Button("Follow", systemImage: "plus.circle.fill") {
+                                settingManager.primaryButtonHaptic()
+                                
+                            }
+                            .primaryButton()
                         }
                         
-                        
-                        Text("Biography")
+                        Text(profile.biography)
                             .bodyCard()
                         
                         Section {
-                            ForEach(0..<3) { _ in
-                                PostCard()
+                            if !viewModel.profilePosts.isEmpty {
+                                ForEach(viewModel.profilePosts) { post in
+                                    PostCard()
+                                        .onAppear {
+                                            if post == viewModel.profilePosts.last {
+                                                Task { try? await viewModel.fetchPosts() }
+                                            }
+                                        }
+                                }
+                            } else {
+                                ContentUnavailableView {
+                                    Label("No Posts from this user", systemImage: "square.stack.3d.up.slash.fill")
+                                        .titleCard()
+                                } description: {
+                                    Text("Damn, someone tell them?")
+                                        .bodyCard()
+                                        .padding(.top, 6)
+                                }
                             }
+                            
                         } header: {
                             Text("Posts by this user:")
                                 .sectionHeader()
@@ -75,14 +105,7 @@ struct ProfileDetailView: View {
                 .contentMargins(16, for: .scrollContent)
                 .customNavBar((!profile.displayName.isEmpty ? profile.displayName : profile.username) ?? "")
                 .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        Text("")
-                    }
-                    
-                    ToolbarItem(placement: .secondaryAction) {
-                        Button("Settings") { showSettings = true }
-                            .sheet(isPresented: $showSettings) { SettingsView() }
-                    }
+                    ToolbarItem(placement: .primaryAction) { Text("") }
                     
                     ToolbarItem(placement: .secondaryAction) {
                         Button("Report User", role: .destructive) {
@@ -93,6 +116,28 @@ struct ProfileDetailView: View {
                 }
             } else { ProfileLoading() }
         }
+        .task { await viewModel.fetchProfile() }
+        .task {
+            let stringToConvert = await loadImgURLString()
+            properImgURL = URL(string: stringToConvert)
+            print(properImgURL!)
+        }
+    }
+    
+    @MainActor
+    func loadImgURLString() async -> String {
+        await viewModel.fetchProfile()
+        guard let profile = viewModel.profile else { return "Failed 1" }
+        do {
+            let actualURL = try supabase.storage.from("profile_images")
+                .getPublicURL(path: profile.imageURL)
+                .absoluteString
+            
+            return actualURL
+        } catch {
+            print("ERROR LOADING PFP URL: \(error.localizedDescription)")
+            return "Failed..."
+        }
     }
 }
 
@@ -100,26 +145,29 @@ struct ProfileDetailView: View {
 class ProfileDetailsViewModel {
     
     let profileID: UUID
-    var profile: Profile? = Profile.profile1()
-    var errAlert = false
+    let errHandler = ErrorHandler()
+    var profile: Profile?
+    var followerCount: Int = 0
+    var followingCount: Int = 0
     var alreadyFollowing = false
+    var editProfile = false
     var viewingSelf = false
-    var errMsg = ""
-    var profilePosts = [any Post]()
+    var profilePosts = [Petition]()
+    
+    private var currentPage = 0
+    private var pageSize = 5
+    private var morePostsAvailable = true
     
     init(profileID: UUID) {
         self.profileID = profileID
-        Task {
-            await fetchProfile()
-        }
+        Task { await fetchProfile() }
     }
     
     @MainActor
-    private func fetchProfile() async {
+    func fetchProfile() async {
         do {
             
             let currentUserID = try await auth.session.user.id
-            
             viewingSelf = profileID == currentUserID
             
             let profileResult: Profile = try await database.from("profiles")
@@ -130,50 +178,69 @@ class ProfileDetailsViewModel {
                 .value
             
             profile = profileResult
+            
+            try await fetchPosts()
+            
         } catch {
             print("ERROR FETCHING PROFILE: \(error.localizedDescription)")
+            errHandler.showError(error: .profile(.userProfileNotFound))
         }
     }
-
-    func postInteractionButton() -> some View {
-        if !viewingSelf && !alreadyFollowing {
-            return AnyView(
-                Button("Follow", systemImage: "plus.circle.fill") {
-                    // Action goes here
-                }
-                .primaryButton()
-            )
-        } else if !viewingSelf && alreadyFollowing {
-            return AnyView(
-                Menu("Following", systemImage: "checkmark.circle.fill") {
-                    Button("Unfollow", role: .destructive) {
-                        // Action goes here
-                    }
-                }
-                .secondaryButton()
-            )
-        } else {
-            return AnyView(
-                Button("Edit Profile", systemImage: "") {
-                    // Action goes here
-                }
-                .secondaryButton()
-            )
-        }
-    }
-
     
+    @MainActor
     func fetchPosts() async throws {
         
+        guard morePostsAvailable else { return }
+        
+        let fromIndex = currentPage * pageSize
+        let toIndex = fromIndex + pageSize - 1
+        
+        let fetchedPosts: [Petition] = try await database.from("petitions")
+            .select()
+            .eq("user_id", value: profileID)
+            .range(from: fromIndex, to: toIndex)
+            .execute()
+            .value
+        
+        if fetchedPosts.count < 2 { morePostsAvailable = false }
+        
+        profilePosts.append(contentsOf: fetchedPosts)
+        currentPage += 1
     }
     
     func followUser() async {
-        
+        do {
+            let followResult = try await database.from("follows")
+                .insert(["followed_id": profileID])
+                .execute()
+            
+            print("Follow Successful: \(followResult)")
+            self.alreadyFollowing = true
+        } catch {
+            print("ERR DEBUG: \(error)")
+            errHandler.showError(error: .profile(.unknown))
+        }
+    }
+    
+    func unfollowUser() async {
+        do {
+            let unfollowResult = try await database.from("follows")
+                .delete()
+                .eq("follower_id", value: try await auth.session.user.id)
+                .eq("followed_id", value: profileID)
+                .single()
+                .execute()
+            
+            print("Unfollow Successful: \(unfollowResult)")
+            self.alreadyFollowing = false
+        } catch {
+            print("ERROR UNFOLLOWING USER: \(error.localizedDescription)")
+            errHandler.showError(error: .profile(.unknown))
+        }
     }
     
     // This function fetches all the followers except for the current user, if the user follows them.
     func fetchFollowers() -> String {
-        
         Task {
             do {
                 let followerCount: Int = try await database.from("follows")
@@ -187,10 +254,10 @@ class ProfileDetailsViewModel {
                 return "\(formatNumber(followerCount))"
             } catch {
                 print("ERROR FETCHING FOLLOWERS: \(error)")
-                return ""
+                return "0"
             }
         }
-        return ""
+        return "0"
     }
     
     func followDisplay() -> some View {
@@ -219,10 +286,10 @@ class ProfileDetailsViewModel {
                 return "\(formatNumber(followingCount))"
             } catch {
                 print("ERROR GRABBING FOLLOWING: \(error)")
-                return ""
+                return "0"
             }
         }
-        return ""
+        return "0"
     }
     
     // This formats the numbers in a more user friendly manner (1k, 20.2k for example instead of 1,000 or 20,200)
@@ -259,13 +326,10 @@ class ProfileDetailsViewModel {
         numberFormatter.multiplier = NSNumber(value: 1 / divisionValue)
         return numberFormatter.string(from: NSNumber(value: number)) ?? "\(number)"
     }
-    
-    func showError(errorMessage: String) {
-        errMsg = errorMessage
-        errAlert = true
-    }
 }
 
+
+// This ID is my own account I created on the app, used to test it out and make sure profle updates are working
 #Preview {
-    ProfileDetailView(profileID: UUID())
+    ProfileDetailView(profileID: UUID(uuidString: "92861c19-7e49-40f3-94e2-c8b64bea6129")!)
 }

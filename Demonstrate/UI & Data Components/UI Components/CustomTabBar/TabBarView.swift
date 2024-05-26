@@ -13,21 +13,21 @@ enum TabBarItem: Hashable {
     
     var iconName: String {
         switch self {
-        case .home: "demo.home"
-        case .search: "magnifyingglass"
-        case .newPost: "plus"
-        case .activity: "bell.fill"
-        case .profile: "person.crop.circle.fill"
+            case .home: "demo.home"
+            case .search: "magnifyingglass"
+            case .newPost: "plus"
+            case .activity: "bell.fill"
+            case .profile: "person.crop.circle.fill"
         }
     }
     
     var title: String {
         switch self {
-        case .home: "Home"
-        case .search: "Search"
-        case .newPost: "Post"
-        case .activity: "Activity"
-        case .profile: "Profile"
+            case .home: "Home"
+            case .search: "Search"
+            case .newPost: "Post"
+            case .activity: "Activity"
+            case .profile: "Profile"
         }
     }
 }
@@ -40,6 +40,8 @@ struct TabBarView: View {
     
     @Namespace var namespace
     @State private var newPost = false
+    @State private var petitionShortcut = false
+    @State private var eventShortcut = false
     
     let tabs: [TabBarItem]
     @Binding var selection: TabBarItem
@@ -96,7 +98,6 @@ extension TabBarView {
                         .font(.custom("Unbounded", size: 9))
                 }
                 
-                
             } else {
                 Button {
                     AppSettingsManager().primaryButtonHaptic()
@@ -117,11 +118,17 @@ extension TabBarView {
                 )
                 .background(.regularMaterial, in: .circle)
                 .clipShape(.circle)
+                .contextMenu {
+                    Button("New Petition", systemImage: "signature") { petitionShortcut = true }
+                    Button("New Event", systemImage: "clock.fill") { eventShortcut = true }
+                }
+                .sheet(isPresented: $newPost) { PostTypeView(isPresented: $newPost) }
+                .sheet(isPresented: $petitionShortcut) { ChooseTopicView(postType: .petition, fromShortcut: true) }
+                .sheet(isPresented: $eventShortcut) { ChooseTopicView(postType: .event, fromShortcut: true) }
             }
         }
         .foregroundStyle(localSelection == tab ? Color.accentColor : .secondary)
         .frame(maxWidth: .infinity)
-        .sheet(isPresented: $newPost) { PostTypeView(isPresented: $newPost) }
     }
 }
 

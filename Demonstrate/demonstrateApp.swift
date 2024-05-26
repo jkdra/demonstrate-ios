@@ -16,10 +16,7 @@ struct demonstrateApp: App {
     
     init() {
         // For progressive image loading
-        let pipeline = ImagePipeline {
-            $0.isProgressiveDecodingEnabled = true
-            // You can customize other settings here as needed.
-        }
+        let pipeline = ImagePipeline { $0.isProgressiveDecodingEnabled = true }
         ImagePipeline.shared = pipeline
         
         Task { try? Tips.configure([.datastoreLocation(.applicationDefault)]) }

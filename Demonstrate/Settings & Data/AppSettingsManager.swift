@@ -74,5 +74,4 @@ final class AppSettingsManager {
     }
 }
 
-let errorHaptic: () = AppSettingsManager.shared.errorHaptic()
-let successHaptic: () = AppSettingsManager.shared.successHaptic()
+let settingManager = AppSettingsManager.shared

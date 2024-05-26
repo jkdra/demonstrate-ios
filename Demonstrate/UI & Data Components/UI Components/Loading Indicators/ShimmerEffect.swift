@@ -15,9 +15,9 @@ struct ShimmerEffect: View {
     var body: some View {
         LinearGradient(
             colors: [
-                Color(uiColor: .systemGray5),
+                Color(uiColor: .systemGray4),
                 Color(uiColor: .systemGray6),
-                Color(uiColor: .systemGray5)
+                Color(uiColor: .systemGray4)
             ],
             startPoint: startPoint,
             endPoint: endPoint

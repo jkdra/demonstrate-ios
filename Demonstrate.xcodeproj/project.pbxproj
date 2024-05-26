@@ -30,6 +30,8 @@
 		755F6B1E2BF16FF500DEC05A /* AppSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755F6B1D2BF16FF500DEC05A /* AppSettingsManager.swift */; };
 		7573A9AD2BFD1DC2007A8563 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7573A9AC2BFD1DC2007A8563 /* MyProfileView.swift */; };
 		757B09042BF51C8B005AC408 /* PopGestureDisabler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757B09032BF51C8B005AC408 /* PopGestureDisabler.swift */; };
+		75A71DF62C032121003542A1 /* Table Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A71DF52C032121003542A1 /* Table Enums.swift */; };
+		75A71DF82C032754003542A1 /* Error Handling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A71DF72C032754003542A1 /* Error Handling.swift */; };
 		75C8C8602BEDF59D008D162B /* demonstrateApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C85F2BEDF59D008D162B /* demonstrateApp.swift */; };
 		75C8C8622BEDF59D008D162B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C8C8612BEDF59D008D162B /* ContentView.swift */; };
 		75C8C8642BEDF59E008D162B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75C8C8632BEDF59E008D162B /* Assets.xcassets */; };
@@ -114,6 +116,8 @@
 		755F6B1D2BF16FF500DEC05A /* AppSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsManager.swift; sourceTree = "<group>"; };
 		7573A9AC2BFD1DC2007A8563 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		757B09032BF51C8B005AC408 /* PopGestureDisabler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopGestureDisabler.swift; sourceTree = "<group>"; };
+		75A71DF52C032121003542A1 /* Table Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Table Enums.swift"; sourceTree = "<group>"; };
+		75A71DF72C032754003542A1 /* Error Handling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error Handling.swift"; sourceTree = "<group>"; };
 		75C8C85C2BEDF59D008D162B /* Demonstrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demonstrate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C8C85F2BEDF59D008D162B /* demonstrateApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = demonstrateApp.swift; sourceTree = "<group>"; };
 		75C8C8612BEDF59D008D162B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -192,6 +196,8 @@
 			isa = PBXGroup;
 			children = (
 				755800B22BF273B500D4B6FB /* Topic Enum.swift */,
+				75A71DF52C032121003542A1 /* Table Enums.swift */,
+				75A71DF72C032754003542A1 /* Error Handling.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -215,7 +221,7 @@
 			path = PostStruct;
 			sourceTree = "<group>";
 		};
-		757B09052BF51DE9005AC408 /* UI Data Components */ = {
+		757B09052BF51DE9005AC408 /* UI & Data Components */ = {
 			isa = PBXGroup;
 			children = (
 				75C8C8A62BEE0809008D162B /* UI Components */,
@@ -223,7 +229,7 @@
 				75C8C8C22BEF323C008D162B /* ProfileComponents */,
 				75C8C8CA2BF05080008D162B /* PostComponents */,
 			);
-			path = "UI Data Components";
+			path = "UI & Data Components";
 			sourceTree = "<group>";
 		};
 		75C8C8532BEDF59D008D162B = {
@@ -253,7 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				75C8C8C72BEFCEDE008D162B /* Settings & Data */,
-				757B09052BF51DE9005AC408 /* UI Data Components */,
+				757B09052BF51DE9005AC408 /* UI & Data Components */,
 				75C8C8CD2BF05487008D162B /* MainContentPages */,
 				75C8C8992BEDF6D9008D162B /* Onboarding & Auth */,
 				75C8C89C2BEDF744008D162B /* Supabase Client.swift */,
@@ -593,6 +599,7 @@
 				755800B32BF273B500D4B6FB /* Topic Enum.swift in Sources */,
 				75C8C8BC2BEE9C54008D162B /* FullscreenLoading.swift in Sources */,
 				755F6B162BF155A900DEC05A /* Post Protocol.swift in Sources */,
+				75A71DF62C032121003542A1 /* Table Enums.swift in Sources */,
 				7553B2932BF1CA6D002FCC5C /* NewUsernameView.swift in Sources */,
 				75C8C8B32BEE0B4D008D162B /* OnboardingScreen.swift in Sources */,
 				755800B52BF27BDD00D4B6FB /* ChooseTopicView.swift in Sources */,
@@ -617,6 +624,7 @@
 				75E757582BF6A08D00B82FAE /* EventStruct.swift in Sources */,
 				7553B2972BF1D399002FCC5C /* FeaturedPostCardLoading.swift in Sources */,
 				75C8C8D22BF05AD6008D162B /* WelcomeView.swift in Sources */,
+				75A71DF82C032754003542A1 /* Error Handling.swift in Sources */,
 				755893812BF5278900DCF3A9 /* PostDetailView.swift in Sources */,
 				7553B2992BF1D474002FCC5C /* ProfileLoading.swift in Sources */,
 				7553B28D2BF18293002FCC5C /* SettingsView.swift in Sources */,

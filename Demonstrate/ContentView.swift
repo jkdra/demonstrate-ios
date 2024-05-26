@@ -18,6 +18,7 @@ enum NetworkStatus {
 struct ContentView: View {
     
     @Bindable var authViewModel = AuthenticationViewModel()
+    @Bindable private var errorHandler = ErrorHandler()
     @State private var netState: NetworkStatus = .connecting
     let monitor = NWPathMonitor()
     
@@ -29,6 +30,9 @@ struct ContentView: View {
 //                    .fullScreenCover(isPresented: $authViewModel.showOnboarding) {
 //                        OnboardingScreen(isPresented: $authViewModel.showOnboarding)
 //                    }
+                    .alert(isPresented: $errorHandler.errorOccured, error: errorHandler.currentError) { _ in } message: { err in
+                        Text(err.errorLongDesctription)
+                    }
             } else {
                 ContentUnavailableView {
                     Label("Uhh, internet? Hello?", systemImage: "network.slash")
@@ -41,11 +45,12 @@ struct ContentView: View {
                     
                     Button("Retry", systemImage: "arrow.triangle.2.circlepath") { internetHandler() }
                         .primaryButton()
-                        
                 }
             }
         }
         .onAppear { internetHandler() }
+        
+
     }
     
     private func internetHandler() {
@@ -78,8 +83,29 @@ struct MainView: View {
             HomeView()
                 .tag(TabBarItem.home)
             
-            Text("Activity")
-                .tag(TabBarItem.activity)
+            ContentUnavailableView {
+                Label("Coming Soon!", systemImage: "bell.badge.fill")
+                    .font(.custom("Unbounded", size: 16))
+            } description: {
+                Text("This page will be available in a future update! For now, feel free to test out the app!")
+                    .font(.custom("Unbounded", size: 14))
+                    .lineSpacing(4)
+                    .padding(.top, 4)
+            }
+            .font(.custom("Unbounded", size: 14))
+            .tag(TabBarItem.activity)
+            
+            VStack {
+                Text("Oop- looks like you found a secret page!")
+                
+                Text("Now uh, navigate to a different page please...")
+                    .foregroundStyle(.secondary)
+                    .padding(.top)
+            }
+            .safeAreaPadding()
+            .multilineTextAlignment(.center)
+            .font(.custom("Unbounded", size: 16))
+            .tag(TabBarItem.newPost)
             
             SearchView()
                 .tag(TabBarItem.search)

@@ -51,12 +51,11 @@ struct CreateProfileView: View {
                 .onChange(of: photoItem) { if let photoItem { updateImage(from: photoItem) } }
                 .padding()
                 TextField("Display Name", text: $displayName)
-                    .modifier(CustomTextFieldStyle())
+                    .displayNameField()
                     .focused($focus)
                 
                 TextField("Bio", text: $biography, axis: .vertical)
-                    .frame(height: 48, alignment: .top)
-                    .modifier(CustomTextFieldStyle())
+                    .bioField()
                     .focused($focus)
                 
                 Spacer()
@@ -74,11 +73,12 @@ struct CreateProfileView: View {
                 
             }
             .navigationBarBackButtonHidden()
+            .navigationDestination(isPresented: $success) { WelcomeView(isPresented: $isPresented) }
             .safeAreaPadding()
             .overlay { FullscreenLoading(show: $profileManage.loading) }
             .confirmationDialog("Skip Profile Setup?", isPresented: $confirmProfileSkip, titleVisibility: .visible) {
                 
-                Button("Skip Setup", role: .destructive) { isPresented = false }
+                Button("Skip Setup", role: .destructive) { success = true }
                 
                 Button("Continue", role: .cancel) { }
                 

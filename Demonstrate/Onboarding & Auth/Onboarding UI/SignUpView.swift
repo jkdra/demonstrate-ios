@@ -22,7 +22,6 @@ struct SignUpView: View {
     
     var body: some View {
         ZStack {
-            
             VStack (alignment: .leading, spacing: 10) {
                 Text(verbatim: "Welcome to the movement!")
                     .largeTitle()
@@ -30,7 +29,7 @@ struct SignUpView: View {
                     .headline()
                 
                 Spacer()
-                Button("Sign Up") { AppSettingsManager().primaryButtonHaptic(); signUpUser() }
+                Button("Sign Up") { settingManager.primaryButtonHaptic(); signUpUser() }
                     .primaryButton()
                     .disableWithOpacity(usernameCheck != .available || email.isEmpty || password.isEmpty)
             }
@@ -100,8 +99,6 @@ struct SignUpView: View {
             }
         }
         .padding()
-        .alert("Whoops!", isPresented: $viewModel.error, actions: {}) { Text(viewModel.errorMsg)}
-        .alert("Whoops!", isPresented: $pManage.error, actions: {}) { Text(pManage.errorMsg)}
         .overlay { FullscreenLoading(show: $viewModel.loading)}
         
     }

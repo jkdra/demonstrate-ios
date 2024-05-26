@@ -14,13 +14,11 @@ import SwiftUI
 class ProfileManagement {
     
     var loading = false
-    var error = false
-    var errorMsg = ""
+    let errHandler = ErrorHandler()
     
     @MainActor
     func saveProfile(newDispName: String, newBio: String, imageData: Data?) async -> Bool {
         do {
-            
             let currentUser = try await auth.session.user
             let imageURL = try await uploadImage(imageData: imageData)
             
@@ -39,7 +37,41 @@ class ProfileManagement {
             return true
         } catch {
             print("ERROR UPDATING PROFILE: \(error)")
-            showError(errorMsg: error.localizedDescription)
+            errHandler.showError(error: .profile(.updateFailed))
+            return false
+        }
+    }
+    
+    @MainActor
+    func followUser(id: UUID) async -> Bool {
+        do {
+            let followResult = try await database.from("follows")
+                .insert(["followed_id": id])
+                .execute()
+            
+            print("Follow Successful: \(followResult)")
+            return true
+        } catch {
+            print("ERROR FOLLOWING: \(error)")
+            errHandler.showError(error: .profile(.unknown))
+            return false
+        }
+    }
+    
+    @MainActor
+    func unfollowUser(id: UUID) async -> Bool {
+        do {
+            try await database.from("follows")
+                .delete()
+                .eq("followed_id", value: id)
+                .eq("follower_id", value: try await auth.session.user.id)
+                .single()
+                .execute()
+            
+            return true
+        } catch {
+            print("ERROR UNFOLLOWING: \(error)")
+            errHandler.showError(error: .profile(.unknown))
             return false
         }
     }
@@ -55,7 +87,10 @@ class ProfileManagement {
             
             completion(fetchedProfile)
             
-        } catch { print("ERROR FETCHING: \(error)") }
+        } catch {
+            print("ERROR FETCHING: \(error)")
+            errHandler.showError(error: .profile(.userProfileNotFound))
+        }
     }
     
     
@@ -75,7 +110,7 @@ class ProfileManagement {
             print(result)
         } catch {
             print("ERROR UPDATING USERNAME: \(error)")
-            showError(errorMsg: error.localizedDescription)
+            errHandler.showError(error: .profile(.unknown))
         }
     }
     
@@ -100,11 +135,6 @@ class ProfileManagement {
             )
         
         return filePath
-    }
-    
-    private func showError(errorMsg: String) {
-        self.errorMsg = errorMsg
-        error = true
     }
     
     func updateImage(from photoItem: PhotosPickerItem, completion: @escaping (Data) -> (Void)) {

@@ -24,6 +24,7 @@ struct WelcomeView: View {
                 .primaryButton()
         }
         .navigationBarBackButtonHidden()
+        .navigationPopGestureDisabled()
         .safeAreaPadding()
     }
 }

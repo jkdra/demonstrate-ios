@@ -31,5 +31,5 @@ private struct NavigationPopGestureDisabler: UIViewRepresentable {
 
 public extension View {
     @ViewBuilder
-    func navigationPopGestureDisabled(_ disabled: Bool) -> some View { background { NavigationPopGestureDisabler(disabled: disabled) } }
+    func navigationPopGestureDisabled(_ disabled: Bool = true) -> some View { background { NavigationPopGestureDisabler(disabled: disabled) } }
 }

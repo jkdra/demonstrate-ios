@@ -55,6 +55,7 @@ final class AuthenticationViewModel {
     var showOnboarding = false
     var oAuthSuccess = false
     var loading = false
+    let errHandler = ErrorHandler()
     var error = false
     var errorMsg = ""
     var flow: AuthFlow = .idle
@@ -71,7 +72,7 @@ final class AuthenticationViewModel {
             print(response)
         } catch {
             print("ERROR SIGNING UP: \(error)")
-            showError(errorMsg: error.localizedDescription)
+            errHandler.showError(error: .authentication(.invalidCredentials))
         }
     }
     
@@ -87,7 +88,7 @@ final class AuthenticationViewModel {
             showOnboarding = false
         } catch {
             print("ERROR SIGNING IN: \(error)")
-            showError(errorMsg: error.localizedDescription)
+            errHandler.showError(error: .authentication(.incorrectPassword))
         }
     }
     
@@ -97,14 +98,14 @@ final class AuthenticationViewModel {
         defer { loading = false }
         
         guard !email.isEmpty else {
-            showError(errorMsg: "Uh, we need an email? Please type one in.")
+            errHandler.showError(error: .authentication(.invalidEmail))
             return
         }
         
         do {
             try await auth.resetPasswordForEmail(email)
         } catch {
-            showError(errorMsg: error.localizedDescription)
+            errHandler.showError(error: .authentication(.invalidEmail))
         }
     }
     
@@ -121,7 +122,7 @@ final class AuthenticationViewModel {
             }
         } catch {
             print("ERROR SIGNING OUT: \(error.localizedDescription)")
-            showError(errorMsg: error.localizedDescription)
+            errHandler.showError(error: .authentication(.unknown))
         }
     }
     
@@ -241,7 +242,7 @@ final class AuthenticationViewModel {
                 // Username is nil, prompt user to set up their profile
                 await MainActor.run { flow = .signUpOAuth }
             }
-            successHaptic
+            settingManager.successHaptic()
         } catch {
             print("Error checking user status: \(error.localizedDescription)")
             await MainActor.run { flow = .signUpOAuth } // Default to sign up on error
@@ -284,7 +285,7 @@ final class AuthenticationViewModel {
                 let userAuth = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
                 let user = userAuth.user
                 
-                guard let idToken = user.idToken else { throw AuthenticationError.tokenError(message: "ID Token Missing") }
+                guard let idToken = user.idToken else { print("ERROR WITH GOOGLE SIGN IN: ID TOKEN MISSING"); return }
                 
                 guard let nonce = currentNonce else {
                     print("Nonce never recieved...")
@@ -298,10 +299,10 @@ final class AuthenticationViewModel {
                 try await auth.signInWithIdToken(credentials: credentials)
                 await checkOAuthUser()
                 await MainActor.run { oAuthSuccess = true }
-                successHaptic
+                settingManager.successHaptic()
             } catch {
                 print("ERROR SIGNING IN WITH GOOGLE: \(error.localizedDescription)")
-                showError(errorMsg: error.localizedDescription)
+                errHandler.showError(error: .authentication(.unknown))
             }
         }
     }
@@ -323,37 +324,9 @@ final class AuthenticationViewModel {
             }
         } catch {
             print("ERROR DELETING ACCOUNT: \(error)")
-            await showError(errorMsg: error.localizedDescription)
+            errHandler.showError(error: .authentication(.unknown))
         }
     }
-    
-    @MainActor
-    private func showError(errorMsg: String) {
-        errorHaptic
-        self.errorMsg = errorMsg
-        error = true
-    }
-}
-
-enum AuthenticationError: Error, LocalizedError {
-    case userExists
-    case userNotFound
-    case unknownError(String)
-    
-    var errorDescription: String? {
-        switch self {
-            case .userExists:
-                return "An account with this email already exists."
-            case .userNotFound:
-                return "User not found. Please sign up."
-            case .unknownError:
-                return "An unknown error occurred."
-            case .tokenError(message: let message):
-                return message
-        }
-    }
-    
-    case tokenError(message: String)
 }
 
 @Observable
@@ -399,8 +372,8 @@ final class AppleSignInModel: NSObject, ASAuthorizationControllerDelegate, ASAut
                     print(result)
                     await AuthenticationViewModel().checkOAuthUser()
                 } catch {
-                    errorHaptic
                     print("ERROR with apple sign in: \(error.localizedDescription)")
+                    ErrorHandler().showError(error: .authentication(.unknown))
                 }
             }
         }

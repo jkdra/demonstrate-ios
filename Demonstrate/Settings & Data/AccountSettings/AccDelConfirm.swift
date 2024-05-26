@@ -12,8 +12,9 @@ struct AccDelConfirm: View {
     
     let viewModel = AuthenticationViewModel()
     @State private var confirmUsername = ""
-    @State private var usernameToCompare = ""
+    @State private var usernameToCompare: String?
     @Environment(\.dismiss) var dismiss
+    @ObserveInjection private var inject
     
     var body: some View {
         NavigationStack {
@@ -53,23 +54,26 @@ struct AccDelConfirm: View {
             }
             .padding()
         }
+        .enableInjection()
         .tint(.red)
     }
     
     private func fetchUsernameToCompare() async {
         
         do {
-            let currentUser = try await auth.session.user
+            let currentUserID: UUID = try await auth.session.user.id
             
             let fetchedUsername: String = try await database.from("profiles")
                 .select("username")
-                .eq("id", value: currentUser.id)
+                .eq("id", value: currentUserID)
+                .single()
                 .execute()
                 .value
             
             await MainActor.run { usernameToCompare = fetchedUsername }
         } catch {
-            dismiss()
+            print("ERROR FETCHING SESSION: \(error.localizedDescription)")
+            print("ERR DEBUG: \(error)")
         }
     }
     
@@ -81,6 +85,4 @@ struct AccDelConfirm: View {
     }
 }
 
-#Preview {
-    AccDelConfirm()
-}
+#Preview { AccDelConfirm() }

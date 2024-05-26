@@ -16,8 +16,7 @@ struct MyProfileView: View {
     var body: some View {
         NavigationStack {
             Group {
-                if let id { ProfileDetailView(profileID: id) } else { ProfileLoading()
-                    .disabled(true)}
+                if let id { ProfileDetailView(profileID: id) } else { ProfileLoading().disabled(true) }
             }
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -36,10 +35,10 @@ struct MyProfileView: View {
     private func fetchCurrentUser() async {
         do {
             let id = try await auth.session.user.id
-            
             await MainActor.run { self.id = id }
         } catch {
             print("ERROR FETCHING ID: \(error.localizedDescription)")
+            ErrorHandler().showError(error: .profile(.userProfileNotFound))
         }
     }
 }
