@@ -33,7 +33,7 @@ enum UsernameCheckStatus {
         case .lessThan3Char: "Should have 3 characters minimum."
         case .invalidCharacters: "Can only contain letters, numbers, \".\" & \"_\"."
         case .invalidStartEnd: "Must start & end with a letter."
-        case .error: "Shit, There was an error. :/"
+        case .error: "Dammit, There was an error. :/"
         case .available: "Username Available!"
         default: " "
         }

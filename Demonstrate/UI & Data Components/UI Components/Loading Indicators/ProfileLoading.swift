@@ -47,7 +47,7 @@ struct ProfileLoading: View {
                     }
                     
                     Section {
-                        ForEach(0..<5) { _ in PostCard() }
+                        ForEach(0..<5) { _ in PostCardLoading() }
                     } header: {
                         Capsule()
                             .frame(width: 256, height: 14)
@@ -96,7 +96,7 @@ struct ProfileLoading: View {
                                     }
                                     
                                     Section {
-                                        ForEach(0..<5) { _ in PostCard() }
+                                        ForEach(0..<5) { _ in PostCardLoading() }
                                     } header: {
                                         Capsule()
                                             .frame(width: 256, height: 14)

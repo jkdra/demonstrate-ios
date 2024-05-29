@@ -14,10 +14,10 @@ struct Event: Post {
     var title: String
     var summary: String
     var description: String
-    var authorID: UUID?
+    var userID: UUID?
     var topic: Topic
     var archived: Bool = false
-    var imageURL: String
+    var imagePath: String
     var postType: PostType = .event
     var startsAt: Date
     var endsAt: Date
@@ -27,8 +27,8 @@ struct Event: Post {
         case id, title, summary, description, topic, archived, location
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case authorID = "author_id"
-        case imageURL = "image_url"
+        case userID = "user_id"
+        case imagePath = "image_path"
         case postType = "post_type"
         case startsAt = "starts_at"
         case endsAt = "ends_at"
@@ -40,7 +40,7 @@ struct Event: Post {
             summary: "",
             description: "",
             topic: .economy,
-            imageURL: "",
+            imagePath: "",
             startsAt: Date(),
             endsAt: Date(),
             location: ""
@@ -53,7 +53,7 @@ struct Event: Post {
             summary: "",
             description: "",
             topic: .economy,
-            imageURL: "",
+            imagePath: "",
             startsAt: Date(),
             endsAt: Date(),
             location: ""
@@ -66,7 +66,7 @@ struct Event: Post {
             summary: "",
             description: "",
             topic: .economy,
-            imageURL: "",
+            imagePath: "",
             startsAt: Date(),
             endsAt: Date(),
             location: ""

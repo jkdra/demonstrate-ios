@@ -15,6 +15,8 @@ import GoogleSignIn
 struct demonstrateApp: App {
     
     init() {
+        
+        
         // For progressive image loading
         let pipeline = ImagePipeline { $0.isProgressiveDecodingEnabled = true }
         ImagePipeline.shared = pipeline

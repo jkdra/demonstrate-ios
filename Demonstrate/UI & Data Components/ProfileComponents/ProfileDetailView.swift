@@ -77,13 +77,15 @@ struct ProfileDetailView: View {
                         
                         Section {
                             if !viewModel.profilePosts.isEmpty {
-                                ForEach(viewModel.profilePosts) { post in
-                                    PostCard()
-                                        .onAppear {
-                                            if post == viewModel.profilePosts.last {
-                                                Task { try? await viewModel.fetchPosts() }
+                                VStack {
+                                    ForEach(viewModel.profilePosts) { post in
+                                        PostCard(post: post)
+                                            .onAppear {
+                                                if post == viewModel.profilePosts.last {
+                                                    Task { try? await viewModel.fetchPosts() }
+                                                }
                                             }
-                                        }
+                                    }
                                 }
                             } else {
                                 ContentUnavailableView {
@@ -105,22 +107,29 @@ struct ProfileDetailView: View {
                 .contentMargins(16, for: .scrollContent)
                 .customNavBar((!profile.displayName.isEmpty ? profile.displayName : profile.username) ?? "")
                 .toolbar {
-                    ToolbarItem(placement: .primaryAction) { Text("") }
-                    
-                    ToolbarItem(placement: .secondaryAction) {
-                        Button("Report User", role: .destructive) {
+                    ToolbarItem(placement: .primaryAction) {
+                        Menu("Profile Options", systemImage: "ellipsis.circle") {
+                            if !viewModel.viewingSelf {
+                                Button("Report User", role: .destructive) {
+                                    
+                                }
+                            } else {
+                                Button("Settings") {
+                                    
+                                }
+                            }
                             
                         }
+                        .symbolRenderingMode(.hierarchical)
                     }
                     
                 }
-            } else { ProfileLoading() }
+            } else { ProfileLoading().disabled(true) }
         }
-        .task { await viewModel.fetchProfile() }
         .task {
+            await viewModel.fetchProfile()
             let stringToConvert = await loadImgURLString()
             properImgURL = URL(string: stringToConvert)
-            print(properImgURL!)
         }
     }
     
@@ -167,8 +176,8 @@ class ProfileDetailsViewModel {
     func fetchProfile() async {
         do {
             
-            let currentUserID = try await auth.session.user.id
-            viewingSelf = profileID == currentUserID
+//            let currentUserID = try await auth.session.user.id
+//            viewingSelf = profileID == currentUserID
             
             let profileResult: Profile = try await database.from("profiles")
                 .select()

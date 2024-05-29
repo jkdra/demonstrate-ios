@@ -6,25 +6,38 @@
 //
 
 import SwiftUI
+import Supabase
 
 struct PostCard: View {
+    
+    let viewModel: PostCardViewModel
+    
+    init(post: any Post) {
+        self.viewModel = PostCardViewModel(post: post)
+    }
+    
     var body: some View {
+        
+        let post = viewModel.post
+        
         NavigationLink {
             
         } label: {
             VStack(alignment: .leading, spacing: 10) {
-                Text("Title")
+                Text(post.title)
                     .modifier(CustomTitlePostCard())
                 
-                Text("Summary\nSummary\nSummary")
+                Text(post.summary)
                     .lineLimit(3, reservesSpace: true)
-                    .modifier(CustomBodyPostCard())
+                    .multilineTextAlignment(.leading)
+                    .bodyCard()
+                    .safeAreaPadding(.trailing, 48)
                 
                 Divider()
                 HStack {
                     Circle()
                         .frame(width: 16, height: 16)
-                    Text("Footer")
+                    Text(viewModel.authorName)
                         .modifier(CustomFooterPostCard())
                     
                     Spacer()
@@ -51,11 +64,11 @@ struct PostCard: View {
             .clipShape(.rect(cornerRadius: 14))
         }
         .foregroundStyle(.primary)
+        .task { await viewModel.fetchAuthorDetails() }
+        .frame(maxWidth: 512)
         .overlay(alignment: .topTrailing) {
             Menu {
-                Button("View Author") {
-                    
-                }
+                if let userID = post.userID { NavigationLink("View Author") { ProfileDetailView(profileID: userID) } }
                 Button("Report Post", role: .destructive) {
                     
                 }
@@ -70,22 +83,61 @@ struct PostCard: View {
             .foregroundStyle(.primary)
         }
         .contextMenu {
-            Button("View Author") {
-                
-            }
+            if let userID = post.userID { NavigationLink("View Author") { ProfileDetailView(profileID: userID) } }
+            
             Button("Report Post", role: .destructive) {
                 
             }
         }
-        .frame(maxWidth: 512)
     }
 }
 
 @Observable
 class PostCardViewModel {
+    var post: any Post
+    var authorName = ""
+    var authorImage = ""
+    
+    init(post: any Post) { self.post = post }
+    
+    @MainActor
+    func fetchAuthorDetails() async {
+        do {
+            guard let userID = post.userID else { return }
+            
+            let baseQuery = database.from("profiles")
+            
+//            let profileImage: String = try await baseQuery.select("image_url")
+//                .eq("id", value: userID)
+//                .single()
+//                .execute()
+//                .value
+//
+//            authorImage = profileImage
+            
+            let username: String = try await baseQuery
+                .select("username")
+                .eq("id", value: userID)
+                .single()
+                .execute()
+                .value
+            
+//            let displayName: String = try await baseQuery
+//                .select("display_name")
+//                .eq("id", value: userID)
+//                .single()
+//                .execute()
+//                .value
+            
+            authorName = username
+        } catch {
+            print("ERROR FETCHING DETAILS: \(error)")
+        }
+    }
+    
     
 }
 
 #Preview {
-    PostCard()
+    PostCard(post: Petition.petition1())
 }

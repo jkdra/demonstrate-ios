@@ -47,9 +47,9 @@ protocol Post: Identifiable, Codable, Hashable {
     var title: String { get set }
     var summary: String { get set }
     var description: String { get set }
-    var authorID: UUID? { get }
+    var userID: UUID? { get }
     var topic: Topic { get set }
     var archived: Bool { get set }
-    var imageURL: String { get set }
+    var imagePath: String { get set }
     var postType: PostType { get set }
 }

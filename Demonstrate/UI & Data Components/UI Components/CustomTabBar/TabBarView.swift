@@ -119,12 +119,9 @@ extension TabBarView {
                 .background(.regularMaterial, in: .circle)
                 .clipShape(.circle)
                 .contextMenu {
-                    Button("New Petition", systemImage: "signature") { petitionShortcut = true }
-                    Button("New Event", systemImage: "clock.fill") { eventShortcut = true }
+                    Button("New Post", systemImage: "plus.circle.fill") { newPost = true }
                 }
                 .sheet(isPresented: $newPost) { PostTypeView(isPresented: $newPost) }
-                .sheet(isPresented: $petitionShortcut) { ChooseTopicView(postType: .petition, fromShortcut: true) }
-                .sheet(isPresented: $eventShortcut) { ChooseTopicView(postType: .event, fromShortcut: true) }
             }
         }
         .foregroundStyle(localSelection == tab ? Color.accentColor : .secondary)

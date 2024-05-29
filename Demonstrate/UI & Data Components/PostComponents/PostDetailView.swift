@@ -21,17 +21,21 @@ struct PostDetailView: View {
     var iphoneView: Bool { heightClass == .regular && widthClass == .compact ? true : false }
     
     
-    init(post: any Post = Petition.petition1()) {
-        viewModel = PostDetailViewModel(post: post)
-    }
+    init(post: any Post) { viewModel = PostDetailViewModel(post: post) }
     
     var body: some View {
         
         let post = viewModel.post
         
         ScrollView {
-            LazyImage(url: URL(string: post.imageURL)) { state in
-                if let image = state.image { image.resizable() } else { Color.accentColor }
+            LazyImage(url: URL(string: post.imagePath)) { state in
+                if let image = state.image { 
+                    image.resizable()
+                } else if state.error != nil {
+                    Color(uiColor: .systemGray4)
+                } else {
+                    ShimmerEffect()
+                }
             }
             .aspectRatio(contentMode: .fill)
             .asStretchyHeader(startingHeight: UIScreen.main.bounds.height / 2.2)
@@ -52,7 +56,7 @@ struct PostDetailView: View {
                     }
                     .foregroundStyle(.primary)
                     
-                    Text("Title")
+                    Text(post.title)
                         .font(.custom("Unbounded-Regular_Bold", size: 24))
                 }
                 .padding()
@@ -63,13 +67,6 @@ struct PostDetailView: View {
                 }
                 
             }
-            Grid(alignment: .center) {
-                
-                ForEach(0..<50) { _ in
-                    Text("Hello")
-                }
-                
-            }
             VStack(spacing: 12) {
                 
                 Text("Fugiat elit proident culpa laborum nostrud culpa veniam esse nisi irure aute anim esse magna culpa.")
@@ -77,9 +74,9 @@ struct PostDetailView: View {
                 
                 Section {
                     VStack {
-                        if viewModel.userIsAuthor {
+                        if !viewModel.userIsAuthor {
                             Button("Edit \(post.postType.postTitle)", systemImage: "square.and.pencil") {
-                                AppSettingsManager().primaryButtonHaptic()
+                                settingManager.primaryButtonHaptic()
                                 editPost = true
                             }
                             .secondaryButton()
@@ -109,7 +106,7 @@ struct PostDetailView: View {
                     
                     HStack {
                         Button {
-                            AppSettingsManager().primaryButtonHaptic()
+                            settingManager.primaryButtonHaptic()
                         } label: {
                             Label("Ask Quill", image: "quillicon.final")
                         }
@@ -125,13 +122,16 @@ struct PostDetailView: View {
                 } header: {
                     Text("Overview")
                         .sectionHeader()
+                        .padding(.top, 10)
                 }
                 
                 Section {
-                    
+                    Text(post.description)
+                        .bodyPage()
                 } header: {
-                    Text("Description")
+                    Text("About This \(post.postType.postTitle)")
                         .sectionHeader()
+                        .padding(.top, 10)
                 }
             }
             
@@ -141,9 +141,11 @@ struct PostDetailView: View {
     }
     
     var header: some View {
-        ZStack {
-            Text("Title")
+        let post = viewModel.post
+        return ZStack {
+            Text(post.title)
                 .padding(10)
+                .lineLimit(1)
                 .font(.custom("Unbounded-Regular_Semibold", size: 16))
                 .hAlign(.center)
                 .background(.regularMaterial)
@@ -208,7 +210,7 @@ class PostDetailViewModel {
         self.post = post
         
         // This segment checks if the current user is the author of the post displayed
-        guard let authorID = post.authorID else { return }
+        guard let authorID = post.userID else { return }
         Task {
             let userID = try? await auth.session.user.id
             await MainActor.run { userIsAuthor = userID == authorID }
@@ -243,5 +245,5 @@ struct CustomPageBodyStyle: ViewModifier {
 }
 
 #Preview {
-    PostDetailView()
+    PostDetailView(post: Petition.petition2())
 }

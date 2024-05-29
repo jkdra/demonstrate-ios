@@ -26,7 +26,7 @@ struct EditPostView: View {
             ScrollView {
                 PhotosPicker(selection: $photoItem, matching: .images) {
                     if let imageData, let uiiimg = UIImage(data: imageData) { Image(uiImage: uiiimg).resizable() } else {
-                        LazyImage(url: URL(string: postToEdit.imageURL)) { state in
+                        LazyImage(url: URL(string: postToEdit.imagePath)) { state in
                             if let image = state.image { image.resizable() } else {
                                 RoundedRectangle(cornerRadius: 14)
                                     .foregroundStyle(.tertiary)
@@ -65,9 +65,13 @@ struct EditPostView: View {
                     .onAppear { newStart = event.startsAt; newEnd = event.endsAt }
                     .onChange(of: newStart) { event.startsAt = newStart; postToEdit = event }
                     .onChange(of: newEnd) { event.endsAt = newEnd; postToEdit = event }
-                } else if postToEdit is Petition {
+                } else if let petitionToEdit = postToEdit as? Petition {
                     TextField("Signature Goal", text: $signatureGoal)
                         .modifier(CustomTextFieldStyle())
+                        .onAppear {
+                            signatureGoal = "\(petitionToEdit.signatureGoal)"
+                        }
+                        .focused($focus)
                 }
                 
                 TextField("Title", text: $postToEdit.title)
@@ -112,27 +116,28 @@ struct EditPostView: View {
                         .font(.custom("Unbounded", size: 14))
                 }
                 
-                ToolbarItem(placement: .primaryAction) { }
-                
-                ToolbarItem(placement: .secondaryAction) {
-                    Picker("Change Topic", selection: $postToEdit.topic) {
-                        ForEach(Topic.allTopics(), id: \.title) { Text($0.title).tag($0) }
+                ToolbarItem(placement: .primaryAction) { 
+                    Menu {
+                        Section {
+                            Picker("Change Topic", selection: $postToEdit.topic) {
+                                ForEach(Topic.allTopics(), id: \.title) { Text($0.title).tag($0) }
+                            }
+                            .pickerStyle(MenuPickerStyle())
+                            Button("Archive \(postToEdit.postType.postTitle)") { archive() }
+                        }
+                        
+                        Section {
+                            Button("Delete \(postToEdit.postType.postTitle)", role: .destructive) { delete() }
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis.circle.fill")
+                            .symbolRenderingMode(.hierarchical)
                     }
-                }
-                
-                ToolbarItem(placement: .secondaryAction) {
-                    Button("Archive \(postToEdit.postType.postTitle)") { archive() }
-                }
-                
-                ToolbarItem(placement: .secondaryAction) {
-                    Section {
-                        Button("Delete \(postToEdit.postType.postTitle)", role: .destructive) { delete() }
-                    }
+
                 }
             }
         }
         .overlay { FullscreenLoading(show: $viewModel.loading) }
-        .alert("Oh! uhm...", isPresented: $viewModel.error) { } message: { Text(viewModel.errMsg) }
     }
     
     func saveUpdates() {

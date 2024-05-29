@@ -10,12 +10,12 @@ import NukeUI
 
 struct FeaturedPostCard: View {
     
-    var viewModel = PostCardViewModel()
+    var viewModel = PostCardViewModel(post: Petition.petition1())
     
     let imageURL = ""
     
     var body: some View {
-        
+        let post = viewModel.post
         LazyImage(url: URL(string: imageURL)) { state in
             if let image = state.image {
                 image.resizable()
@@ -34,9 +34,10 @@ struct FeaturedPostCard: View {
         .frame(height: 284)
         .overlay(alignment: .bottomLeading) {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Title")
+                Text(post.title)
                     .modifier(CustomTitlePostCard())
-                Text("Summary\nSummary")
+                Text(post.summary)
+                    .lineLimit(2)
                     .modifier(CustomBodyPostCard())
             }
             .padding()
@@ -57,9 +58,7 @@ struct FeaturedPostCard: View {
                 Spacer()
                 
                 Menu {
-                    Button("View Author") {
-                        
-                    }
+                    if let userID = post.userID { NavigationLink("View Author") { ProfileDetailView(profileID: userID) } }
                     
                     Button("Report Post", role: .destructive) {
                         
@@ -83,7 +82,7 @@ struct FeaturedPostCard: View {
         }
         .clipShape(.rect(cornerRadius: 14))
         .contextMenu {
-            Button("View Author") { }
+            if let userID = post.userID { NavigationLink("View Author") { ProfileDetailView(profileID: userID) } }
             
             Button("Report Post", role: .destructive) { }
         }

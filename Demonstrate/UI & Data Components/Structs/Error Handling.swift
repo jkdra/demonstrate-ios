@@ -10,7 +10,6 @@ import Foundation
 
 @Observable
 class ErrorHandler {
-    
     var currentError: AppError = .authentication(.userNotFound)
     var errorOccured = false
     
