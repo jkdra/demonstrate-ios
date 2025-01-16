@@ -7,11 +7,15 @@
 
 import SwiftUI
 
+
+let fontName: String = "Unbounded"
+
 @main
 struct demonstrateApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            WelcomeView()
         }
     }
 }

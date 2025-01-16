@@ -6,13 +6,39 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		956BCBF02D37D966008AF64A /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 956BCBEF2D37D966008AF64A /* Nuke */; };
+		956BCBF22D37D966008AF64A /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = 956BCBF12D37D966008AF64A /* NukeExtensions */; };
+		956BCBF42D37D966008AF64A /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = 956BCBF32D37D966008AF64A /* NukeUI */; };
+		956BCBF62D37D966008AF64A /* NukeVideo in Frameworks */ = {isa = PBXBuildFile; productRef = 956BCBF52D37D966008AF64A /* NukeVideo */; };
+		956BCC3A2D385C5A008AF64A /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 956BCC392D385C5A008AF64A /* Auth */; };
+		956BCC3C2D385C5A008AF64A /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 956BCC3B2D385C5A008AF64A /* Functions */; };
+		956BCC3E2D385C5A008AF64A /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 956BCC3D2D385C5A008AF64A /* PostgREST */; };
+		956BCC402D385C5A008AF64A /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 956BCC3F2D385C5A008AF64A /* Realtime */; };
+		956BCC422D385C5A008AF64A /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 956BCC412D385C5A008AF64A /* Storage */; };
+		956BCC442D385C5A008AF64A /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 956BCC432D385C5A008AF64A /* Supabase */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
-		9582F8E22D35495600371464 /* demonstrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = demonstrate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9582F8E22D35495600371464 /* Demonstrate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demonstrate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		9582F8F52D3549C900371464 /* Exceptions for "demonstrate" folder in "Demonstrate" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 9582F8E12D35495600371464 /* Demonstrate */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		9582F8E42D35495600371464 /* demonstrate */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9582F8F52D3549C900371464 /* Exceptions for "demonstrate" folder in "Demonstrate" target */,
+			);
 			path = demonstrate;
 			sourceTree = "<group>";
 		};
@@ -23,6 +49,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				956BCC442D385C5A008AF64A /* Supabase in Frameworks */,
+				956BCC3C2D385C5A008AF64A /* Functions in Frameworks */,
+				956BCBF42D37D966008AF64A /* NukeUI in Frameworks */,
+				956BCC3E2D385C5A008AF64A /* PostgREST in Frameworks */,
+				956BCC402D385C5A008AF64A /* Realtime in Frameworks */,
+				956BCBF02D37D966008AF64A /* Nuke in Frameworks */,
+				956BCBF22D37D966008AF64A /* NukeExtensions in Frameworks */,
+				956BCC422D385C5A008AF64A /* Storage in Frameworks */,
+				956BCC3A2D385C5A008AF64A /* Auth in Frameworks */,
+				956BCBF62D37D966008AF64A /* NukeVideo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,7 +76,7 @@
 		9582F8E32D35495600371464 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9582F8E22D35495600371464 /* demonstrate.app */,
+				9582F8E22D35495600371464 /* Demonstrate.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +84,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9582F8E12D35495600371464 /* demonstrate */ = {
+		9582F8E12D35495600371464 /* Demonstrate */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9582F8F02D35495800371464 /* Build configuration list for PBXNativeTarget "demonstrate" */;
+			buildConfigurationList = 9582F8F02D35495800371464 /* Build configuration list for PBXNativeTarget "Demonstrate" */;
 			buildPhases = (
 				9582F8DE2D35495600371464 /* Sources */,
 				9582F8DF2D35495600371464 /* Frameworks */,
@@ -63,11 +99,21 @@
 			fileSystemSynchronizedGroups = (
 				9582F8E42D35495600371464 /* demonstrate */,
 			);
-			name = demonstrate;
+			name = Demonstrate;
 			packageProductDependencies = (
+				956BCBEF2D37D966008AF64A /* Nuke */,
+				956BCBF12D37D966008AF64A /* NukeExtensions */,
+				956BCBF32D37D966008AF64A /* NukeUI */,
+				956BCBF52D37D966008AF64A /* NukeVideo */,
+				956BCC392D385C5A008AF64A /* Auth */,
+				956BCC3B2D385C5A008AF64A /* Functions */,
+				956BCC3D2D385C5A008AF64A /* PostgREST */,
+				956BCC3F2D385C5A008AF64A /* Realtime */,
+				956BCC412D385C5A008AF64A /* Storage */,
+				956BCC432D385C5A008AF64A /* Supabase */,
 			);
 			productName = demonstrate;
-			productReference = 9582F8E22D35495600371464 /* demonstrate.app */;
+			productReference = 9582F8E22D35495600371464 /* Demonstrate.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +131,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9582F8DD2D35495600371464 /* Build configuration list for PBXProject "demonstrate" */;
+			buildConfigurationList = 9582F8DD2D35495600371464 /* Build configuration list for PBXProject "Demonstrate" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -94,12 +140,16 @@
 			);
 			mainGroup = 9582F8D92D35495600371464;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				956BCBEE2D37D966008AF64A /* XCRemoteSwiftPackageReference "Nuke" */,
+				956BCC382D385C5A008AF64A /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9582F8E32D35495600371464 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9582F8E12D35495600371464 /* demonstrate */,
+				9582F8E12D35495600371464 /* Demonstrate */,
 			);
 		};
 /* End PBXProject section */
@@ -177,7 +227,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -234,7 +284,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -249,27 +299,35 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = demonstrate/demonstrate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"demonstrate/Preview Content\"";
 				DEVELOPMENT_TEAM = CY6ALA5KQP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = demonstrate/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Demonstrate;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.demonstrateapp.demonstrate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -278,34 +336,42 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = demonstrate/demonstrate.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"demonstrate/Preview Content\"";
 				DEVELOPMENT_TEAM = CY6ALA5KQP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = demonstrate/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Demonstrate;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = org.demonstrateapp.demonstrate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9582F8DD2D35495600371464 /* Build configuration list for PBXProject "demonstrate" */ = {
+		9582F8DD2D35495600371464 /* Build configuration list for PBXProject "Demonstrate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9582F8EE2D35495800371464 /* Debug */,
@@ -314,7 +380,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9582F8F02D35495800371464 /* Build configuration list for PBXNativeTarget "demonstrate" */ = {
+		9582F8F02D35495800371464 /* Build configuration list for PBXNativeTarget "Demonstrate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9582F8F12D35495800371464 /* Debug */,
@@ -324,6 +390,78 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		956BCBEE2D37D966008AF64A /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.8.0;
+			};
+		};
+		956BCC382D385C5A008AF64A /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		956BCBEF2D37D966008AF64A /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 956BCBEE2D37D966008AF64A /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		956BCBF12D37D966008AF64A /* NukeExtensions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 956BCBEE2D37D966008AF64A /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeExtensions;
+		};
+		956BCBF32D37D966008AF64A /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 956BCBEE2D37D966008AF64A /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
+		956BCBF52D37D966008AF64A /* NukeVideo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 956BCBEE2D37D966008AF64A /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeVideo;
+		};
+		956BCC392D385C5A008AF64A /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 956BCC382D385C5A008AF64A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
+		};
+		956BCC3B2D385C5A008AF64A /* Functions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 956BCC382D385C5A008AF64A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Functions;
+		};
+		956BCC3D2D385C5A008AF64A /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 956BCC382D385C5A008AF64A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+		956BCC3F2D385C5A008AF64A /* Realtime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 956BCC382D385C5A008AF64A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Realtime;
+		};
+		956BCC412D385C5A008AF64A /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 956BCC382D385C5A008AF64A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Storage;
+		};
+		956BCC432D385C5A008AF64A /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 956BCC382D385C5A008AF64A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9582F8DA2D35495600371464 /* Project object */;
 }

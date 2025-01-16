@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "Google G logo.svg",
       "idiom" : "universal"
     }
   ],

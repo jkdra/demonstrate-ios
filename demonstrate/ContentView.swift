@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var text: String = ""
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack (spacing: -2) {
+            TextInput("Test", text: $text, location: .top)
+            TextInput("Test", text: $text, location: .center)
+            TextInput("Test", text: $text, location: .bottom)
         }
-        .padding()
     }
 }
 
