@@ -48,7 +48,6 @@ struct WelcomeView: View {
                 
                 Group {
                     Image("demo.fill").font(.system(size: 132))
-                    Text("Fuck Congress.").font(.custom("Unbounded-Regular_Bold", fixedSize: 32))
                 }
                 .foregroundStyle(Color(uiColor: .systemBackground))
                 
@@ -97,7 +96,6 @@ struct WelcomeView: View {
                         )
                     }
                     .buttonStyle(GoogleButtonStyle())
-                    
                 }
                 
             }

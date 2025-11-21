@@ -21,12 +21,43 @@ struct PrimaryButtonStyle: ButtonStyle {
             .padding()
             .background(!destructive ? Color.accentColor : .red)
             .overlay {
-                RoundedRectangle(cornerRadius: 12)
+                Capsule()
                     .stroke(lineWidth: 6)
                     .foregroundStyle(LinearGradient(colors: [.white, .black], startPoint: .top, endPoint: .bottom))
                     .opacity(0.4)
             }
-            .clipShape(.rect(cornerRadius: 12))
+            .clipShape(.capsule)
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
+            .opacity(configuration.isPressed ? 0.8 : 1)
+    }
+}
+
+enum ButtonPlacement {
+    case top
+    case middle
+    case bottom
+}
+
+struct NewPrimaryButtonStyle: ButtonStyle {
+    
+    let destructive: Bool
+    let position: ButtonPlacement
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .foregroundStyle(Color(uiColor: .systemBackground))
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: .infinity)
+            .fontStyle(.subheadline)
+            .padding()
+            .background(!destructive ? Color.accentColor : .red)
+            .overlay {
+                UnevenRoundedRectangle(cornerRadii: .init(topLeading: position == .top ? 36 : 0, bottomLeading: position == .bottom ? 36 : 0, bottomTrailing: position == .bottom ? 36 : 0, topTrailing: position == .top ? 36 : 0))
+                    .stroke(lineWidth: 6)
+                    .foregroundStyle(LinearGradient(colors: [.white, .black], startPoint: .top, endPoint: .bottom))
+                    .opacity(0.4)
+            }
+            .clipShape(.capsule)
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
             .opacity(configuration.isPressed ? 0.8 : 1)
     }
@@ -45,12 +76,12 @@ struct SecondaryButtonStyle: ButtonStyle {
             .padding()
             .background(Color(uiColor: .secondarySystemBackground))
             .overlay {
-                RoundedRectangle(cornerRadius: 12)
+                Capsule()
                     .stroke(lineWidth: 6)
                     .foregroundStyle(LinearGradient(colors: [.white, .black], startPoint: .top, endPoint: .bottom))
                     .opacity(0.4)
             }
-            .clipShape(.rect(cornerRadius: 12))
+            .clipShape(.capsule)
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
             .opacity(configuration.isPressed ? 0.8 : 1)
     }
@@ -69,12 +100,12 @@ struct AppleButtonStyle: ButtonStyle {
             .background(Color(uiColor: .secondarySystemBackground))
             .environment(\.colorScheme, .dark)
             .overlay {
-                RoundedRectangle(cornerRadius: 12)
+                Capsule()
                     .stroke(lineWidth: 6)
                     .foregroundStyle(LinearGradient(colors: [.white, .black], startPoint: .top, endPoint: .bottom))
                     .opacity(0.4)
             }
-            .clipShape(.rect(cornerRadius: 12))
+            .clipShape(.capsule)
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
             .opacity(configuration.isPressed ? 0.8 : 1)
     }
@@ -93,12 +124,12 @@ struct GoogleButtonStyle: ButtonStyle {
             .background(Color(uiColor: .secondarySystemBackground))
             .environment(\.colorScheme, .light)
             .overlay {
-                RoundedRectangle(cornerRadius: 12)
+                Capsule()
                     .stroke(lineWidth: 6)
                     .foregroundStyle(LinearGradient(colors: [.white, .black], startPoint: .top, endPoint: .bottom))
                     .opacity(0.4)
             }
-            .clipShape(.rect(cornerRadius: 12))
+            .clipShape(.capsule)
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
             .opacity(configuration.isPressed ? 0.8 : 1)
     }

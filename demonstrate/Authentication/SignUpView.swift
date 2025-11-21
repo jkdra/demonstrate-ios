@@ -15,7 +15,7 @@ struct SignUpView: View {
     
     @FocusState private var focusState: Bool
     @State private var showPassword = false
-    @State private var emailValidityState: EmailValidityState = .empty
+    @State private var emailValidityState: EmailValidityState = .empty 
     @State private var emailInput: String = ""
     @State private var passwordInput: String = ""
     @State private var passwordStrength: Double = 0
